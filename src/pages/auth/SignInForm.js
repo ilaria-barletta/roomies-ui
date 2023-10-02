@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 
 import { Form, Button, Col, Row, Container } from "react-bootstrap";
 import axios from "axios";
+import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 
 const SignInForm = () => {
   const [signInData, setSignInData] = useState({
@@ -10,6 +11,7 @@ const SignInForm = () => {
     password: "",
   });
   const { username, password } = signInData;
+  const setCurrentUser = useSetCurrentUser();
 
   const history = useHistory();
 
@@ -23,7 +25,8 @@ const SignInForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("/dj-rest-auth/login/", signInData);
+      const { data } = await axios.post("/dj-rest-auth/login/", signInData);
+      setCurrentUser(data.user);
       history.push("/");
     } catch (err) {
       // TODO: Add errors to top of the form
