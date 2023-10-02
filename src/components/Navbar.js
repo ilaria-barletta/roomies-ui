@@ -1,10 +1,24 @@
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
-import { useCurrentUser } from "../contexts/CurrentUserContext";
+import { useHistory } from "react-router-dom";
+import {
+  useCurrentUser,
+  useSetCurrentUser,
+} from "../contexts/CurrentUserContext";
+import { NavDropdown } from "react-bootstrap";
+import axios from "axios";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
+  const setCurrentUser = useSetCurrentUser();
+  const history = useHistory();
+
+  const signOut = async () => {
+    await axios.post("/dj-rest-auth/logout/");
+    setCurrentUser(null);
+    history.push("/signin");
+  };
 
   return (
     <Navbar>
@@ -14,7 +28,9 @@ const NavBar = () => {
         </NavLink>
         <Navbar.Collapse className="justify-content-end">
           {currentUser && (
-            <Navbar.Text>Signed in as: {currentUser.username}</Navbar.Text>
+            <NavDropdown title={`Signed in as: ${currentUser.username}`}>
+              <NavDropdown.Item onClick={signOut}>Sign out</NavDropdown.Item>
+            </NavDropdown>
           )}
           {!currentUser && (
             <NavLink to="/signin">
