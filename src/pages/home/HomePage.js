@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { useCurrentUser } from "../../../contexts/CurrentUserContext";
+import { Link } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import axios from "axios";
-import HouseholdDetails from "../../../components/households/HouseholdDetails";
+import HouseholdDetails from "../../components/households/HouseholdDetails";
 
 const HomePage = () => {
   const currentUser = useCurrentUser();
@@ -31,7 +33,16 @@ const HomePage = () => {
     return <>There are no household details to show.</>;
   }
 
-  return <HouseholdDetails household={households[0]} />;
+  return (
+    <>
+      <HouseholdDetails household={households[0]} />
+      {households.length > 1 && (
+        <Container className="mt-3">
+          <Link to="/allhouseholds">View all your households</Link>
+        </Container>
+      )}
+    </>
+  );
 };
 
 export default HomePage;
