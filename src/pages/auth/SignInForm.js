@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import { Form, Button, Col, Row, Container } from "react-bootstrap";
 import axios from "axios";
-import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
+import {
+  useCurrentUser,
+  useSetCurrentUser,
+} from "../../contexts/CurrentUserContext";
 
 const SignInForm = () => {
   const [signInData, setSignInData] = useState({
@@ -12,8 +15,16 @@ const SignInForm = () => {
   });
   const { username, password } = signInData;
   const setCurrentUser = useSetCurrentUser();
+  const currentUser = useCurrentUser();
 
   const history = useHistory();
+
+  useEffect(() => {
+    // Go to the home page if the user has already logged in
+    if (currentUser) {
+      history.push("/");
+    }
+  }, [currentUser, history]);
 
   const handleChange = (event) => {
     setSignInData({
