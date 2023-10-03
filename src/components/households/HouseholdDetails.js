@@ -31,7 +31,10 @@ const HouseholdDetails = ({ household }) => {
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="1">
-            <Card.Body>Hello! I'm another body</Card.Body>
+            <Card.Body>
+              <p>Rent amount: {household.rent}</p>
+              <p>Rent due day: {household.rent_due_day}</p>
+            </Card.Body>
           </Accordion.Collapse>
         </Card>
       </Accordion>
