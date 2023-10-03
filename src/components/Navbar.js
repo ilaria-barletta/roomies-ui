@@ -21,7 +21,7 @@ const NavBar = () => {
   };
 
   return (
-    <Navbar>
+    <Navbar bg="dark" variant="dark">
       <Container>
         <NavLink to="/">
           <Navbar.Brand>Roomies</Navbar.Brand>
