@@ -12,12 +12,13 @@ function App() {
   return (
     <div>
       <NavBar />
-      <Container>
+      <Container className="p-4">
         <Switch>
           <Route exact path="/" render={() => <HomePage />} />
           <Route exact path="/allhouseholds" render={() => <AllHouseholds />} />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
+          <Route exact path="/newhousehold" render={() => <>New Household</>} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>

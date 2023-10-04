@@ -2,12 +2,20 @@ import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 import Members from "./Members";
 
 const HouseholdDetails = ({ household }) => {
   return (
     <>
-      <h1>{household.name}</h1>
+      <div className="d-flex justify-content-between align-items-center">
+        <h1>{household.name}</h1>
+        <div>
+          <Link to="/newhousehold">
+            <Button variant="primary">New Household</Button>
+          </Link>
+        </div>
+      </div>
       <Accordion defaultActiveKey="0">
         <Card>
           <Card.Header>
