@@ -11,6 +11,9 @@ const HouseholdDetails = ({ household }) => {
       <div className="d-flex justify-content-between align-items-center">
         <h1>{household.name}</h1>
         <div>
+          <Link to={`/households/${household.id}/edit`}>
+            <Button variant="secondary">Edit Household</Button>
+          </Link>
           <Link to="/newhousehold">
             <Button variant="primary">New Household</Button>
           </Link>
