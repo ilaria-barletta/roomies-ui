@@ -4,19 +4,23 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Members from "./Members";
 import axios from "axios";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 const HouseholdDetails = ({ household }) => {
   const history = useHistory();
+  const currentUser = useCurrentUser();
+
+  // Validate that the owner is the only one that can do household actions
+  const isOwner = currentUser?.username === household.creator;
 
   const deleteHousehold = async () => {
     await axios.delete(`/households/${household.id}/`);
     history.push("/");
   };
 
-  // TODO: only show edit button if user is creator of household
   return (
     <>
       <div className="d-flex justify-content-between align-items-center">
@@ -28,13 +32,17 @@ const HouseholdDetails = ({ household }) => {
             title="Household Actions"
           >
             <Dropdown.Item href="/newhousehold">New Household</Dropdown.Item>
-            <Dropdown.Item href={`/households/${household.id}/edit`}>
-              Edit {household.name}
-            </Dropdown.Item>
+            {isOwner && (
+              <>
+                <Dropdown.Item href={`/households/${household.id}/edit`}>
+                  Edit {household.name}
+                </Dropdown.Item>
 
-            <Dropdown.Item onClick={deleteHousehold}>
-              Delete {household.name}
-            </Dropdown.Item>
+                <Dropdown.Item onClick={deleteHousehold}>
+                  Delete {household.name}
+                </Dropdown.Item>
+              </>
+            )}
           </DropdownButton>
         </div>
       </div>
