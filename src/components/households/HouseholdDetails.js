@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Members from "./Members";
 
 const HouseholdDetails = ({ household }) => {
+  // TODO: only show edit button if user is creator of household
   return (
     <>
       <div className="d-flex justify-content-between align-items-center">
