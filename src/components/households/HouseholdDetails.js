@@ -2,16 +2,28 @@ import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Members from "./Members";
+import axios from "axios";
 
 const HouseholdDetails = ({ household }) => {
+  const history = useHistory();
+
+  const deleteHousehold = async () => {
+    await axios.delete(`/households/${household.id}/`);
+    history.push("/");
+  };
+
   // TODO: only show edit button if user is creator of household
   return (
     <>
       <div className="d-flex justify-content-between align-items-center">
         <h1>{household.name}</h1>
         <div>
+          <Button variant="danger" onClick={deleteHousehold}>
+            Delete Household
+          </Button>
+
           <Link to={`/households/${household.id}/edit`}>
             <Button variant="secondary">Edit Household</Button>
           </Link>
