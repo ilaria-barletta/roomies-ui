@@ -2,6 +2,8 @@ import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Dropdown from "react-bootstrap/Dropdown";
 import { Link, useHistory } from "react-router-dom";
 import Members from "./Members";
 import axios from "axios";
@@ -19,17 +21,21 @@ const HouseholdDetails = ({ household }) => {
     <>
       <div className="d-flex justify-content-between align-items-center">
         <h1>{household.name}</h1>
-        <div>
-          <Button variant="danger" onClick={deleteHousehold}>
-            Delete Household
-          </Button>
 
-          <Link to={`/households/${household.id}/edit`}>
-            <Button variant="secondary">Edit Household</Button>
-          </Link>
-          <Link to="/newhousehold">
-            <Button variant="primary">New Household</Button>
-          </Link>
+        <div className="d-flex">
+          <DropdownButton
+            id="manage-household-button"
+            title="Household Actions"
+          >
+            <Dropdown.Item href="/newhousehold">New Household</Dropdown.Item>
+            <Dropdown.Item href={`/households/${household.id}/edit`}>
+              Edit {household.name}
+            </Dropdown.Item>
+
+            <Dropdown.Item onClick={deleteHousehold}>
+              Delete {household.name}
+            </Dropdown.Item>
+          </DropdownButton>
         </div>
       </div>
       <Accordion defaultActiveKey="0">
