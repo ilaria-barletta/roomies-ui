@@ -30,7 +30,7 @@ const HomePage = () => {
   }, [currentUser]);
 
   if (!households || !households.length) {
-    return <>There are no household details to show.</>;
+    return <>There are no household details to show.</>; // TODO: link to new household page here
   }
 
   return (

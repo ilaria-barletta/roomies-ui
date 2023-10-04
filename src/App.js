@@ -7,6 +7,7 @@ import SignUpForm from "./pages/auth/SignUpForm";
 import SignInForm from "./pages/auth/SignInForm";
 import HomePage from "./pages/home/HomePage";
 import AllHouseholds from "./pages/allhouseholds/AllHouseholds";
+import NewHouseholdForm from "./pages/newhousehold/NewHousehold";
 
 function App() {
   return (
@@ -18,7 +19,11 @@ function App() {
           <Route exact path="/allhouseholds" render={() => <AllHouseholds />} />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
-          <Route exact path="/newhousehold" render={() => <>New Household</>} />
+          <Route
+            exact
+            path="/newhousehold"
+            render={() => <NewHouseholdForm />}
+          />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>
