@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
+import Modal from "react-bootstrap/Modal";
 import { useHistory } from "react-router-dom";
 import Members from "./Members";
 import axios from "axios";
@@ -12,6 +13,11 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 const HouseholdDetails = ({ household }) => {
   const history = useHistory();
   const currentUser = useCurrentUser();
+  const [showDeletePopup, setShowDeletePopup] = useState(false);
+
+  const onCloseDeletePopup = () => setShowDeletePopup(false);
+
+  const onShowDeletePopup = () => setShowDeletePopup(true);
 
   // Validate that the owner is the only one that can do household actions
   const isOwner = currentUser?.username === household.creator;
@@ -19,7 +25,25 @@ const HouseholdDetails = ({ household }) => {
   const deleteHousehold = async () => {
     await axios.delete(`/households/${household.id}/`);
     history.push("/");
+    setShowDeletePopup(false);
   };
+
+  const confirmDeletePopup = (
+    <Modal show={showDeletePopup} onHide={onCloseDeletePopup}>
+      <Modal.Header closeButton>
+        <Modal.Title>Delete Household</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>Are you sure you want to delete {household.name}?</Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={onCloseDeletePopup}>
+          Cancel
+        </Button>
+        <Button variant="danger" onClick={deleteHousehold}>
+          Delete
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
 
   return (
     <>
@@ -38,7 +62,7 @@ const HouseholdDetails = ({ household }) => {
                   Edit {household.name}
                 </Dropdown.Item>
 
-                <Dropdown.Item onClick={deleteHousehold}>
+                <Dropdown.Item onClick={onShowDeletePopup}>
                   Delete {household.name}
                 </Dropdown.Item>
               </>
@@ -76,6 +100,7 @@ const HouseholdDetails = ({ household }) => {
           </Accordion.Collapse>
         </Card>
       </Accordion>
+      {confirmDeletePopup}
     </>
   );
 };
