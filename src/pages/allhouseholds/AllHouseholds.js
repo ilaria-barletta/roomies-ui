@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import { Button, Container } from "react-bootstrap";
 import HouseholdDetails from "../../components/households/HouseholdDetails";
@@ -53,6 +54,12 @@ const AllHouseholds = () => {
 
   return (
     <>
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h1>All Households</h1>
+        <Link to="/newhousehold">
+          <Button variant="primary">New Household</Button>
+        </Link>
+      </div>
       {households.map((household) => (
         <Card>
           <Card.Body>

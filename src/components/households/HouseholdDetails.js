@@ -5,13 +5,11 @@ import Button from "react-bootstrap/Button";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import Modal from "react-bootstrap/Modal";
-import { useHistory } from "react-router-dom";
 import Members from "./Members";
 import axios from "axios";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 const HouseholdDetails = ({ household, householdDeleted }) => {
-  const history = useHistory();
   const currentUser = useCurrentUser();
   const [showDeletePopup, setShowDeletePopup] = useState(false);
 
