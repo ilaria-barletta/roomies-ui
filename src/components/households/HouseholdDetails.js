@@ -80,6 +80,8 @@ const HouseholdDetails = ({ household, householdDeleted }) => {
               <Members
                 members={household.members}
                 creator={household.creator}
+                isOwner={isOwner}
+                householdId={household.id}
               />
             </Card.Body>
           </Accordion.Collapse>
