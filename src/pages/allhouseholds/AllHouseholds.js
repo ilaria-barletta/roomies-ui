@@ -25,6 +25,12 @@ const AllHouseholds = () => {
     setCurrentHouseholdDetails(null);
   };
 
+  // Reload the list when a household is deleted
+  const householdDeleted = () => {
+    loadHouseholds();
+    viewAllHouseholds();
+  };
+
   if (!households || !households.length) {
     return <>There are no households to show.</>;
   }
@@ -32,7 +38,10 @@ const AllHouseholds = () => {
   if (currentHouseholdDetails) {
     return (
       <>
-        <HouseholdDetails household={currentHouseholdDetails} />
+        <HouseholdDetails
+          household={currentHouseholdDetails}
+          householdDeleted={householdDeleted}
+        />
         <Container className="mt-3">
           <Button variant="link" onClick={viewAllHouseholds}>
             View all households

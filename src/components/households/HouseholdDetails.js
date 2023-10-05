@@ -10,7 +10,7 @@ import Members from "./Members";
 import axios from "axios";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
-const HouseholdDetails = ({ household }) => {
+const HouseholdDetails = ({ household, householdDeleted }) => {
   const history = useHistory();
   const currentUser = useCurrentUser();
   const [showDeletePopup, setShowDeletePopup] = useState(false);
@@ -24,8 +24,8 @@ const HouseholdDetails = ({ household }) => {
 
   const deleteHousehold = async () => {
     await axios.delete(`/households/${household.id}/`);
-    history.push("/");
     setShowDeletePopup(false);
+    householdDeleted();
   };
 
   const confirmDeletePopup = (

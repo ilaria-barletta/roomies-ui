@@ -29,13 +29,21 @@ const HomePage = () => {
     }
   }, [currentUser]);
 
+  // Reload the list when a household is deleted
+  const householdDeleted = () => {
+    loadHouseholds();
+  };
+
   if (!households || !households.length) {
     return <>There are no household details to show.</>; // TODO: link to new household page here
   }
 
   return (
     <>
-      <HouseholdDetails household={households[0]} />
+      <HouseholdDetails
+        household={households[0]}
+        householdDeleted={householdDeleted}
+      />
       {households.length > 1 && (
         <Container className="mt-3">
           <Link to="/allhouseholds">View all your households</Link>
