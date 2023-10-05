@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
+import Spinner from "react-bootstrap/Spinner";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import axios from "axios";
 import HouseholdDetails from "../../components/households/HouseholdDetails";
@@ -10,6 +11,7 @@ const HomePage = () => {
   const currentUser = useCurrentUser();
   const history = useHistory();
   const [households, setHouseHolds] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Redirect from this page if the user hasn't logged in
@@ -21,6 +23,7 @@ const HomePage = () => {
   const loadHouseholds = async () => {
     const { data } = await axios.get("/households/");
     setHouseHolds(data);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -33,6 +36,14 @@ const HomePage = () => {
   const householdDeleted = () => {
     loadHouseholds();
   };
+
+  if (isLoading) {
+    return (
+      <Container className="d-flex justify-content-center">
+        <Spinner animation="border" variant="primary" />
+      </Container>
+    );
+  }
 
   if (!households || !households.length) {
     return <>There are no household details to show.</>; // TODO: link to new household page here

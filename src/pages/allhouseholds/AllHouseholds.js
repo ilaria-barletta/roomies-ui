@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
+import Spinner from "react-bootstrap/Spinner";
 import { Button, Container } from "react-bootstrap";
 import HouseholdDetails from "../../components/households/HouseholdDetails";
 
 const AllHouseholds = () => {
   const [households, setHouseHolds] = useState(null);
   const [currentHouseholdDetails, setCurrentHouseholdDetails] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const loadHouseholds = async () => {
     const { data } = await axios.get("/households/");
     setHouseHolds(data);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -31,6 +34,14 @@ const AllHouseholds = () => {
     loadHouseholds();
     viewAllHouseholds();
   };
+
+  if (isLoading) {
+    return (
+      <Container className="d-flex justify-content-center">
+        <Spinner animation="border" variant="primary" />
+      </Container>
+    );
+  }
 
   if (!households || !households.length) {
     return <>There are no households to show.</>;
