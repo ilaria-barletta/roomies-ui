@@ -78,7 +78,6 @@ const HouseholdDetails = ({ household, householdDeleted }) => {
           <Accordion.Collapse eventKey="0">
             <Card.Body>
               <Members
-                members={household.members}
                 creator={household.creator}
                 isOwner={isOwner}
                 householdId={household.id}

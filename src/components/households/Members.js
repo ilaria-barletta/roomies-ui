@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Container, Spinner } from "react-bootstrap";
 
 import Badge from "react-bootstrap/Badge";
 
-const Members = ({ creator, members, isOwner, householdId }) => {
+const Members = ({ creator, isOwner, householdId }) => {
+  const [members, setMembers] = useState();
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [memberToDelete, setMemberToDelete] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const loadMembers = async () => {
+    const { data } = await axios.get(`/households/${householdId}/members`);
+    setMembers(data);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    loadMembers();
+  }, []);
 
   const onCloseDeletePopup = () => {
     setShowDeletePopup(false);
@@ -20,6 +32,8 @@ const Members = ({ creator, members, isOwner, householdId }) => {
       `/households/${householdId}/members/${memberToDelete.id}`
     );
     setShowDeletePopup(false);
+    // Refresh the list after delete
+    loadMembers();
   };
 
   const clickDeleteMember = (member) => {
@@ -45,6 +59,14 @@ const Members = ({ creator, members, isOwner, householdId }) => {
       </Modal.Footer>
     </Modal>
   );
+
+  if (isLoading) {
+    return (
+      <Container className="d-flex justify-content-center">
+        <Spinner animation="border" variant="primary" />
+      </Container>
+    );
+  }
 
   return (
     <>
