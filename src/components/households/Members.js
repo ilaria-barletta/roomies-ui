@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Button, Modal, Container, Spinner } from "react-bootstrap";
+import { Button, Modal, Container, Spinner, Form } from "react-bootstrap";
 
 import Badge from "react-bootstrap/Badge";
 
 const Members = ({ creator, isOwner, householdId }) => {
   const [members, setMembers] = useState();
+  const [availableMembers, setAvailableMembers] = useState();
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [memberToDelete, setMemberToDelete] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [newMemberToAdd, setNewMemberToAdd] = useState();
 
   const loadMembers = async () => {
     const { data } = await axios.get(`/households/${householdId}/members`);
@@ -16,8 +18,16 @@ const Members = ({ creator, isOwner, householdId }) => {
     setIsLoading(false);
   };
 
+  const loadAvailableMembers = async () => {
+    const { data } = await axios.get(
+      `/households/${householdId}/availableusers`
+    );
+    setAvailableMembers(data);
+  };
+
   useEffect(() => {
     loadMembers();
+    loadAvailableMembers();
   }, []);
 
   const onCloseDeletePopup = () => {
@@ -34,11 +44,30 @@ const Members = ({ creator, isOwner, householdId }) => {
     setShowDeletePopup(false);
     // Refresh the list after delete
     loadMembers();
+    loadAvailableMembers();
   };
 
   const clickDeleteMember = (member) => {
     setMemberToDelete(member);
     onShowDeletePopup();
+  };
+
+  const onNewMemberToAddSelected = (event) => {
+    setNewMemberToAdd(event.target.value);
+  };
+
+  const onNewMemberFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await axios.post(`/households/${householdId}/members`, {
+        user: newMemberToAdd,
+      });
+      loadMembers();
+      loadAvailableMembers();
+      setNewMemberToAdd("");
+    } catch (err) {
+      // TODO: handle errors
+    }
   };
 
   const confirmDeletePopup = (
@@ -85,6 +114,31 @@ const Members = ({ creator, isOwner, householdId }) => {
           )}
         </div>
       ))}
+
+      <Container className="mt-3">
+        <Form onSubmit={onNewMemberFormSubmit}>
+          <Form.Group controlId="exampleForm.SelectCustom">
+            <Form.Label>Add a new member</Form.Label>
+            <Form.Control
+              as="select"
+              custom
+              value={newMemberToAdd}
+              onChange={onNewMemberToAddSelected}
+            >
+              {availableMembers?.map((member) => (
+                <option value={member.id}>{member.username}</option>
+              ))}
+              <option value="">
+                Please select the member you would like to add
+              </option>
+            </Form.Control>
+          </Form.Group>
+
+          <Button variant="primary" type="submit">
+            Add
+          </Button>
+        </Form>
+      </Container>
 
       {confirmDeletePopup}
     </>
