@@ -8,6 +8,7 @@ import Modal from "react-bootstrap/Modal";
 import Members from "./Members";
 import axios from "axios";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import Groceries from "./Groceries";
 
 const HouseholdDetails = ({ household, householdDeleted }) => {
   const currentUser = useCurrentUser();
@@ -95,6 +96,18 @@ const HouseholdDetails = ({ household, householdDeleted }) => {
             <Card.Body>
               <p>Rent amount: {household.rent}</p>
               <p>Rent due day: {household.rent_due_day}</p>
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle as={Button} variant="link" eventKey="2">
+              Groceries
+            </Accordion.Toggle>
+          </Card.Header>
+          <Accordion.Collapse eventKey="2">
+            <Card.Body>
+              <Groceries householdId={household.id} />
             </Card.Body>
           </Accordion.Collapse>
         </Card>
