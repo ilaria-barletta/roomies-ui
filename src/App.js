@@ -9,6 +9,7 @@ import HomePage from "./pages/home/HomePage";
 import AllHouseholds from "./pages/allhouseholds/AllHouseholds";
 import NewHouseholdForm from "./pages/newhousehold/NewHousehold";
 import EditHouseholdForm from "./pages/edithousehold/EditHousehold";
+import GroceryLists from "./pages/groceries/GroceryLists";
 
 function App() {
   return (
@@ -29,6 +30,11 @@ function App() {
             exact
             path="/households/:id/edit"
             render={() => <EditHouseholdForm />}
+          />
+          <Route
+            exact
+            path="/households/:id/groceries"
+            render={() => <GroceryLists />}
           />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>

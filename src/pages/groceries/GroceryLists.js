@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Container, Spinner } from "react-bootstrap";
-import GroceryListDetails from "./GroceryListDetails";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { Container, Spinner, Card } from "react-bootstrap";
 
-const Groceries = ({ householdId }) => {
+const GroceryLists = () => {
+  const { id: householdId } = useParams();
+
   const [lists, setLists] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -29,18 +30,20 @@ const Groceries = ({ householdId }) => {
     );
   }
 
+  // TODO: show the household name in the title
   if (lists && lists.length > 0) {
-    const listToShow = lists[0];
     return (
       <>
-        <GroceryListDetails list={listToShow} />
-        <Container className="mt-3">
-          <Link to={`/households/${householdId}/groceries`}>
-            <Button variant="link">
-              View all grocery lists for this household
-            </Button>
-          </Link>
-        </Container>
+        <div className="d-flex justify-content-between align-items-center mb-3">
+          <h1>Groceries</h1>
+        </div>
+        {lists.map((list) => (
+          <Card className="mb-3">
+            <Card.Body>
+              <Card.Title>{list.name}</Card.Title>
+            </Card.Body>
+          </Card>
+        ))}
       </>
     );
   }
@@ -48,4 +51,4 @@ const Groceries = ({ householdId }) => {
   return <p>There are no grocery lists to show.</p>;
 };
 
-export default Groceries;
+export default GroceryLists;
