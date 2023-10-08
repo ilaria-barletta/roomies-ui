@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Spinner } from "react-bootstrap";
+import GroceryListDetails from "./GroceryListDetails";
 
 const Groceries = ({ householdId }) => {
   const [lists, setLists] = useState();
@@ -29,14 +30,7 @@ const Groceries = ({ householdId }) => {
 
   if (lists && lists.length > 0) {
     const listToShow = lists[0];
-    return (
-      <>
-        <h5>{listToShow.name}</h5>
-        <h6>
-          Created by: {listToShow.creator} on {listToShow.create_date}
-        </h6>
-      </>
-    );
+    return <GroceryListDetails list={listToShow} />;
   }
 
   return <p>There are no grocery lists to show.</p>;

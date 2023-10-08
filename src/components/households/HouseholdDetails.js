@@ -8,7 +8,7 @@ import Modal from "react-bootstrap/Modal";
 import Members from "./Members";
 import axios from "axios";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import Groceries from "./Groceries";
+import Groceries from "./groceries/Groceries";
 
 const HouseholdDetails = ({ household, householdDeleted }) => {
   const currentUser = useCurrentUser();
