@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { Container, Spinner, Card } from "react-bootstrap";
+import { useParams, Link } from "react-router-dom";
+import { Container, Spinner, Card, Button } from "react-bootstrap";
 
 const GroceryLists = () => {
   const { id: householdId } = useParams();
@@ -41,6 +41,9 @@ const GroceryLists = () => {
           <Card className="mb-3">
             <Card.Body>
               <Card.Title>{list.name}</Card.Title>
+              <Link to={`/grocerylists/${list.id}`}>
+                <Button variant="primary">View</Button>
+              </Link>
             </Card.Body>
           </Card>
         ))}

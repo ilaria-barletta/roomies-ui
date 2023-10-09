@@ -35,7 +35,8 @@ const GroceryListDetails = ({ list }) => {
             {items.map((item) => (
               <div className="d-flex justify-content-between">
                 <div>
-                  {item.name} <Badge variant="secondary">{item.assignee}</Badge>
+                  {item.name}{" "}
+                  <Badge variant="secondary">{item.assignee_name}</Badge>
                 </div>
                 <Button variant="danger">
                   <i className="fas fa-trash-alt" />
