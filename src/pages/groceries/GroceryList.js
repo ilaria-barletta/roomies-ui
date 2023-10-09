@@ -36,9 +36,9 @@ const GroceryList = () => {
   return (
     <>
       <GroceryListDetails list={list} />
-      <Container className="mt-3">
+      <div className="mt-5">
         <Button onClick={goBack}>Back</Button>
-      </Container>
+      </div>
     </>
   );
 };

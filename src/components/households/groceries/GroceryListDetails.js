@@ -9,6 +9,7 @@ import {
   Modal,
   Button,
 } from "react-bootstrap";
+import GroceryItemForm from "./GroceryItemForm";
 
 const GroceryListDetails = ({ list }) => {
   const [items, setItems] = useState();
@@ -38,6 +39,10 @@ const GroceryListDetails = ({ list }) => {
   const onClickDeleteItem = (item) => {
     setItemToDelete(item);
     setShowDeletePopup(true);
+  };
+
+  const onItemAdded = () => {
+    loadItems();
   };
 
   useEffect(() => {
@@ -86,7 +91,11 @@ const GroceryListDetails = ({ list }) => {
                   {item.name}{" "}
                   <Badge variant="secondary">{item.assignee_name}</Badge>
                 </div>
-                <DropdownButton id="manage-item-button" title="Item Actions">
+                <DropdownButton
+                  variant="secondary"
+                  id="manage-item-button"
+                  title="Item Actions"
+                >
                   <Dropdown.Item>Edit</Dropdown.Item>
                   <Dropdown.Item onClick={() => onClickDeleteItem(item)}>
                     Delete
@@ -96,6 +105,10 @@ const GroceryListDetails = ({ list }) => {
             ))}
           </div>
         )}
+        <div className="mt-3 d-flex align-items-center">
+          <span className="mr-1">Add a new item</span>
+          <GroceryItemForm listId={list.id} onItemAdded={onItemAdded} />
+        </div>
       </Container>
 
       {confirmDeleteItemPopup}
