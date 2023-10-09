@@ -1,18 +1,24 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Container, Spinner } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Button, Container, Spinner } from "react-bootstrap";
+import { useParams, useHistory } from "react-router-dom";
 import GroceryListDetails from "../../components/households/groceries/GroceryListDetails";
 
 const GroceryList = () => {
   const [list, setList] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
+  const history = useHistory();
 
   const loadList = async () => {
     const { data } = await axios.get(`/grocerylists/${id}/`);
     setList(data);
     setIsLoading(false);
+  };
+
+  const goBack = () => {
+    // Found here: https://v5.reactrouter.com/web/api/history
+    history.goBack();
   };
 
   useEffect(() => {
@@ -27,7 +33,14 @@ const GroceryList = () => {
     );
   }
 
-  return <GroceryListDetails list={list} />;
+  return (
+    <>
+      <GroceryListDetails list={list} />
+      <Container className="mt-3">
+        <Button onClick={goBack}>Back</Button>
+      </Container>
+    </>
+  );
 };
 
 export default GroceryList;
