@@ -1,6 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Badge, Button, Container, Spinner } from "react-bootstrap";
+import {
+  Badge,
+  DropdownButton,
+  Dropdown,
+  Container,
+  Spinner,
+} from "react-bootstrap";
 
 const GroceryListDetails = ({ list }) => {
   const [items, setItems] = useState();
@@ -31,19 +37,21 @@ const GroceryListDetails = ({ list }) => {
         )}
         {!isLoading && !items?.length && <p>This list has no items.</p>}
         {!isLoading && items?.length && (
-          <>
+          <div className="d-flex flex-column" style={{ gap: "8px" }}>
+            {/** TODO: Fix inline style */}
             {items.map((item) => (
               <div className="d-flex justify-content-between">
                 <div>
                   {item.name}{" "}
                   <Badge variant="secondary">{item.assignee_name}</Badge>
                 </div>
-                <Button variant="danger">
-                  <i className="fas fa-trash-alt" />
-                </Button>
+                <DropdownButton id="manage-item-button" title="Item Actions">
+                  <Dropdown.Item>Edit</Dropdown.Item>
+                  <Dropdown.Item>Delete</Dropdown.Item>
+                </DropdownButton>
               </div>
             ))}
-          </>
+          </div>
         )}
       </Container>
     </>
