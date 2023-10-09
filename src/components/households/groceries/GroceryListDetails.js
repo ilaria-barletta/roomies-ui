@@ -6,21 +6,62 @@ import {
   Dropdown,
   Container,
   Spinner,
+  Modal,
+  Button,
 } from "react-bootstrap";
 
 const GroceryListDetails = ({ list }) => {
   const [items, setItems] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [showDeletePopup, setShowDeletePopup] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState();
+
+  const onCloseDeletePopup = () => {
+    setItemToDelete(null);
+    setShowDeletePopup(false);
+  };
 
   const loadItems = async () => {
+    setIsLoading(true);
     const { data } = await axios.get(`/groceryitems/?list=${list.id}`);
     setItems(data);
     setIsLoading(false);
   };
 
+  const deleteItem = async () => {
+    await axios.delete(`/groceryitems/${itemToDelete.id}/`);
+    setItemToDelete(null);
+    setShowDeletePopup(false);
+    loadItems();
+  };
+
+  const onClickDeleteItem = (item) => {
+    setItemToDelete(item);
+    setShowDeletePopup(true);
+  };
+
   useEffect(() => {
     loadItems();
   }, []);
+
+  const confirmDeleteItemPopup = (
+    <Modal show={showDeletePopup} onHide={onCloseDeletePopup}>
+      <Modal.Header closeButton>
+        <Modal.Title>Delete Grocery Item</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        Are you sure you want to delete {itemToDelete?.name}?
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={onCloseDeletePopup}>
+          Cancel
+        </Button>
+        <Button variant="danger" onClick={deleteItem}>
+          Delete
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
 
   return (
     <>
@@ -47,13 +88,17 @@ const GroceryListDetails = ({ list }) => {
                 </div>
                 <DropdownButton id="manage-item-button" title="Item Actions">
                   <Dropdown.Item>Edit</Dropdown.Item>
-                  <Dropdown.Item>Delete</Dropdown.Item>
+                  <Dropdown.Item onClick={() => onClickDeleteItem(item)}>
+                    Delete
+                  </Dropdown.Item>
                 </DropdownButton>
               </div>
             ))}
           </div>
         )}
       </Container>
+
+      {confirmDeleteItemPopup}
     </>
   );
 };
