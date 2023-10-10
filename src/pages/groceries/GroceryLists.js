@@ -36,6 +36,9 @@ const GroceryLists = () => {
       <>
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h1>Groceries ({lists[0].household_name})</h1>
+          <Link to={`/households/${householdId}/newgrocerylist`}>
+            <Button variant="primary">New Grocery List</Button>
+          </Link>
         </div>
         {lists.map((list) => (
           <Card className="mb-3">

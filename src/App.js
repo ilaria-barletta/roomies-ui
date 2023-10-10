@@ -11,6 +11,7 @@ import NewHouseholdForm from "./pages/newhousehold/NewHousehold";
 import EditHouseholdForm from "./pages/edithousehold/EditHousehold";
 import GroceryLists from "./pages/groceries/GroceryLists";
 import GroceryList from "./pages/groceries/GroceryList";
+import NewGroceryList from "./pages/groceries/NewGroceryList";
 
 function App() {
   return (
@@ -41,6 +42,11 @@ function App() {
             exact
             path="/grocerylists/:id"
             render={() => <GroceryList />}
+          />
+          <Route
+            exact
+            path="/households/:id/newgrocerylist"
+            render={() => <NewGroceryList />}
           />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
