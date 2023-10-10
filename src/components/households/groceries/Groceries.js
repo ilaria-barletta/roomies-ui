@@ -10,6 +10,7 @@ const Groceries = ({ householdId }) => {
 
   // Get grocery lists for the household that aren't complete
   const loadGroceryLists = async () => {
+    setIsLoading(true);
     const { data } = await axios.get(
       `/grocerylists/?household=${householdId}&is_complete=false`
     );
@@ -20,6 +21,10 @@ const Groceries = ({ householdId }) => {
   useEffect(() => {
     loadGroceryLists();
   }, []);
+
+  const onDeleteList = () => {
+    loadGroceryLists();
+  };
 
   if (isLoading) {
     return (
@@ -33,7 +38,7 @@ const Groceries = ({ householdId }) => {
     const listToShow = lists[0];
     return (
       <>
-        <GroceryListDetails list={listToShow} />
+        <GroceryListDetails list={listToShow} onDeleteList={onDeleteList} />
         <Container className="mt-3">
           <Link to={`/households/${householdId}/groceries`}>
             <Button variant="link">
