@@ -66,6 +66,11 @@ const HouseholdDetails = ({ household, householdDeleted }) => {
                 </Dropdown.Item>
               </>
             )}
+            <Dropdown.Divider />
+            <Dropdown.Header>Groceries</Dropdown.Header>
+            <Dropdown.Item href={`/households/${household.id}/newgrocerylist`}>
+              New Grocery List
+            </Dropdown.Item>
           </DropdownButton>
         </div>
       </div>
