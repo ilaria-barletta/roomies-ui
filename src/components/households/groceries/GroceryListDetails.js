@@ -9,7 +9,7 @@ import {
   Modal,
   Button,
 } from "react-bootstrap";
-import GroceryItemForm from "./GroceryItemForm";
+import { Link } from "react-router-dom";
 
 const GroceryListDetails = ({ list, onDeleteList }) => {
   const [items, setItems] = useState();
@@ -54,10 +54,6 @@ const GroceryListDetails = ({ list, onDeleteList }) => {
 
   const onClickDeleteList = () => {
     setShowDeleteListPopup(true);
-  };
-
-  const onItemAdded = () => {
-    loadItems();
   };
 
   useEffect(() => {
@@ -109,6 +105,11 @@ const GroceryListDetails = ({ list, onDeleteList }) => {
             Edit
           </Dropdown.Item>
           <Dropdown.Item onClick={onClickDeleteList}>Delete</Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Header>Items</Dropdown.Header>
+          <Dropdown.Item href={`/grocerylists/${list.id}/newitem`}>
+            New Item
+          </Dropdown.Item>
         </DropdownButton>
       </div>
       <h5>
@@ -145,10 +146,6 @@ const GroceryListDetails = ({ list, onDeleteList }) => {
             ))}
           </div>
         )}
-        <div className="mt-3 d-flex align-items-center">
-          <span className="mr-1">Add a new item</span>
-          <GroceryItemForm listId={list.id} onItemAdded={onItemAdded} />
-        </div>
       </Container>
 
       {confirmDeleteItemPopup}

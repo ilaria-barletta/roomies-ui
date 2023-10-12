@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Row, Col, Container } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 
 const GroceryItemForm = ({ listId, onItemAdded }) => {
+  const history = useHistory();
   const [itemData, setItemData] = useState({
     name: "",
     list: listId,
@@ -17,6 +19,11 @@ const GroceryItemForm = ({ listId, onItemAdded }) => {
     });
   };
 
+  const goBack = () => {
+    // Found here: https://v5.reactrouter.com/web/api/history
+    history.goBack();
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     await axios.post("/groceryitems/", itemData);
@@ -28,23 +35,34 @@ const GroceryItemForm = ({ listId, onItemAdded }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <div className="d-flex align-items-center">
-        <Form.Group controlId="name" className="mb-0">
-          <Form.Control
-            type="text"
-            placeholder="Name"
-            name="name"
-            value={name}
-            onChange={handleChange}
-          />
-        </Form.Group>
+    <Row>
+      <Col className="my-auto py-2 p-md-2" md={6}>
+        <Container className="p-4">
+          <h1>Create a new grocery item</h1>
 
-        <Button variant="primary" type="submit" className="ml-1">
-          Add
-        </Button>
-      </div>
-    </Form>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="name">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Name"
+                name="name"
+                value={name}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            <Button variant="primary" type="submit">
+              Create
+            </Button>
+          </Form>
+        </Container>
+
+        <div className="mt-3">
+          <Button onClick={goBack}>Back</Button>
+        </div>
+      </Col>
+    </Row>
   );
 };
 
