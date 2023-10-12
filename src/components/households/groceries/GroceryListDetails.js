@@ -105,7 +105,9 @@ const GroceryListDetails = ({ list, onDeleteList }) => {
       <div className="d-flex justify-content-between">
         <h4>{list.name}</h4>
         <DropdownButton id="manage-household-button" title="List Actions">
-          <Dropdown.Item>Edit</Dropdown.Item>
+          <Dropdown.Item href={`/grocerylists/${list.id}/edit`}>
+            Edit
+          </Dropdown.Item>
           <Dropdown.Item onClick={onClickDeleteList}>Delete</Dropdown.Item>
         </DropdownButton>
       </div>
