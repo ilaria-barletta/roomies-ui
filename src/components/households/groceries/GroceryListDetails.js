@@ -137,7 +137,11 @@ const GroceryListDetails = ({ list, onDeleteList }) => {
                   id="manage-item-button"
                   title="Item Actions"
                 >
-                  <Dropdown.Item>Edit</Dropdown.Item>
+                  <Dropdown.Item
+                    href={`/grocerylists/${list.id}/items/${item.id}/edit`}
+                  >
+                    Edit
+                  </Dropdown.Item>
                   <Dropdown.Item onClick={() => onClickDeleteItem(item)}>
                     Delete
                   </Dropdown.Item>

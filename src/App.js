@@ -14,6 +14,7 @@ import GroceryList from "./pages/groceries/GroceryList";
 import NewGroceryList from "./pages/groceries/NewGroceryList";
 import EditGroceryList from "./pages/groceries/EditGroceryList";
 import NewItemForm from "./pages/groceries/items/NewItem";
+import EditItemForm from "./pages/groceries/items/EditItem";
 
 function App() {
   return (
@@ -54,6 +55,11 @@ function App() {
             exact
             path="/grocerylists/:id/newitem"
             render={() => <NewItemForm />}
+          />
+          <Route
+            exact
+            path="/grocerylists/:id/items/:itemId/edit"
+            render={() => <EditItemForm />}
           />
           <Route
             exact

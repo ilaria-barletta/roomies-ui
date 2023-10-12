@@ -3,17 +3,19 @@ import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col, Container, Spinner } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
-const GroceryItemForm = ({ listId, onItemAdded }) => {
+const GroceryItemForm = ({ listId, onItemAdded, existingItem }) => {
   const history = useHistory();
   const [availableMembers, setAvailableMembers] = useState();
   const [loading, setIsLoading] = useState(true);
   const [itemData, setItemData] = useState({
-    name: "",
-    assignee: "",
+    name: existingItem?.name || "",
+    assignee: existingItem?.assignee || "",
     list: listId,
     is_complete: false,
   });
   const { name, assignee } = itemData;
+
+  const isEditing = !!existingItem;
 
   const handleChange = (event) => {
     setItemData({
@@ -56,7 +58,15 @@ const GroceryItemForm = ({ listId, onItemAdded }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await axios.post("/groceryitems/", itemData);
+
+    // This component is used on the create and edit pages
+    // this code makes it change the api to use depending
+    // on if we are creating or editing
+    if (isEditing) {
+      await axios.put(`/groceryitems/${existingItem.id}/`, itemData);
+    } else {
+      await axios.post("/groceryitems/", itemData);
+    }
     onItemAdded();
   };
 
@@ -68,11 +78,17 @@ const GroceryItemForm = ({ listId, onItemAdded }) => {
     );
   }
 
+  const title = isEditing ? (
+    <h1>Edit grocery item</h1>
+  ) : (
+    <h1>Create a new grocery item</h1>
+  );
+
   return (
     <Row>
       <Col className="my-auto py-2 p-md-2" md={6}>
         <Container className="p-4">
-          <h1>Create a new grocery item</h1>
+          {title}
 
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="name">
@@ -103,7 +119,7 @@ const GroceryItemForm = ({ listId, onItemAdded }) => {
             </Form.Group>
 
             <Button variant="primary" type="submit">
-              Create
+              {isEditing ? "Update" : "Create"}
             </Button>
           </Form>
         </Container>
