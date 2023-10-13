@@ -30,7 +30,9 @@ const GroceryListItems = ({ listId }) => {
 
   const loadItems = async () => {
     setIsLoading(true);
-    const { data } = await axios.get(`/groceryitems/?list=${listId}`);
+    const { data } = await axios.get(
+      `/groceryitems/?list=${listId}&ordering=is_complete` // Show is_complete items at the bottom
+    );
     setItems(data);
     setIsLoading(false);
   };
