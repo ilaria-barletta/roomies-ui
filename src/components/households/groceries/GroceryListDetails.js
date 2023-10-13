@@ -6,11 +6,14 @@ import {
   Container,
   Modal,
   Button,
+  Alert,
 } from "react-bootstrap";
 import GroceryListItems from "./GroceryListItems";
 
 const GroceryListDetails = ({ list, onListChanged }) => {
   const [showDeleteListPopup, setShowDeleteListPopup] = useState(false);
+  const [showChangeListStatusPopup, setShowChangeListStatusPopup] =
+    useState(false);
 
   const onCloseDeleteListPopup = () => {
     setShowDeleteListPopup(false);
@@ -24,6 +27,24 @@ const GroceryListDetails = ({ list, onListChanged }) => {
 
   const onClickDeleteList = () => {
     setShowDeleteListPopup(true);
+  };
+
+  const onCloseChangeListStatusPopup = () => {
+    setShowChangeListStatusPopup(false);
+  };
+
+  const toggleListStatus = async () => {
+    const listData = {
+      ...list,
+      is_complete: !list.is_complete,
+    };
+    await axios.put(`/grocerylists/${list.id}/`, listData);
+    setShowChangeListStatusPopup(false);
+    onListChanged();
+  };
+
+  const onClickChangeListStatus = () => {
+    setShowChangeListStatusPopup(true);
   };
 
   const confirmDeleteListPopup = (
@@ -43,18 +64,67 @@ const GroceryListDetails = ({ list, onListChanged }) => {
     </Modal>
   );
 
+  const changeListStatusPopup = (
+    <Modal
+      show={showChangeListStatusPopup}
+      onHide={onCloseChangeListStatusPopup}
+    >
+      <Modal.Header closeButton>
+        <Modal.Title>
+          {list.is_complete
+            ? "Mark list as incomplete"
+            : "Mark list as complete"}
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <p>
+          Are you sure you want to{" "}
+          {list.is_complete ? "undo completing" : "complete"} {list.name}?
+        </p>
+        {list.is_complete && (
+          <p>
+            Move your list back to incomplete in order to perform actions on it
+            and its items.
+          </p>
+        )}
+        {!list.is_complete && (
+          <p>
+            You will not be able to modify the items on this list after
+            completing the list.
+          </p>
+        )}
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={onCloseChangeListStatusPopup}>
+          Cancel
+        </Button>
+        <Button variant="primary" onClick={toggleListStatus}>
+          Update
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+
   return (
     <>
       <div className="d-flex justify-content-between">
-        <h4>{list.name}</h4>
+        <h4>
+          {list.name} {list.is_complete ? "(Completed)" : ""}
+        </h4>
         <DropdownButton id="manage-household-button" title="List Actions">
+          <Dropdown.Item onClick={onClickChangeListStatus}>
+            {list.is_complete ? "Mark as incomplete" : "Mark as complete"}
+          </Dropdown.Item>
           <Dropdown.Item href={`/grocerylists/${list.id}/edit`}>
             Edit
           </Dropdown.Item>
           <Dropdown.Item onClick={onClickDeleteList}>Delete</Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Header>Items</Dropdown.Header>
-          <Dropdown.Item href={`/grocerylists/${list.id}/newitem`}>
+          <Dropdown.Item
+            href={`/grocerylists/${list.id}/newitem`}
+            disabled={list.is_complete}
+          >
             New Item
           </Dropdown.Item>
         </DropdownButton>
@@ -63,11 +133,19 @@ const GroceryListDetails = ({ list, onListChanged }) => {
         Created by: {list.creator} on {list.create_date}
       </h5>
 
+      {list.is_complete && (
+        <Alert variant="warning">
+          This list has been marked as complete. You can't add, remove, or edit
+          items in completed lists.
+        </Alert>
+      )}
+
       <Container className="mt-3">
-        <GroceryListItems listId={list.id} />
+        <GroceryListItems listId={list.id} isListComplete={list.is_complete} />
       </Container>
 
       {confirmDeleteListPopup}
+      {changeListStatusPopup}
     </>
   );
 };

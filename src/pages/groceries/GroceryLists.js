@@ -27,11 +27,9 @@ const GroceryLists = () => {
     loadGroceryLists();
   };
 
-  // Get grocery lists for the household that aren't complete
+  // Get all grocery lists for the household
   const loadGroceryLists = async () => {
-    const { data } = await axios.get(
-      `/grocerylists/?household=${householdId}&is_complete=false`
-    );
+    const { data } = await axios.get(`/grocerylists/?household=${householdId}`);
     setLists(data);
     setIsLoading(false);
   };
@@ -39,6 +37,9 @@ const GroceryLists = () => {
   useEffect(() => {
     loadGroceryLists();
   }, []);
+
+  const incompleteLists = () => lists?.filter((l) => !l.is_complete);
+  const completeLists = () => lists?.filter((l) => l.is_complete);
 
   if (isLoading) {
     return (
@@ -67,7 +68,6 @@ const GroceryLists = () => {
     </Modal>
   );
 
-  // TODO: show the household name in the title
   if (lists && lists.length > 0) {
     return (
       <>
@@ -77,15 +77,33 @@ const GroceryLists = () => {
             <Button variant="primary">New Grocery List</Button>
           </Link>
         </div>
-        {lists.map((list) => (
+        {incompleteLists().map((list) => (
           <Card className="mb-3">
             <Card.Body>
               <Card.Title>{list.name}</Card.Title>
               <Link to={`/grocerylists/${list.id}`} className="mr-1">
-                <Button variant="primary">View</Button>
+                <Button variant="primary">View List</Button>
               </Link>
               <Link to={`/grocerylists/${list.id}/edit`} className="mr-1">
-                <Button variant="secondary">Edit</Button>
+                <Button variant="secondary">Edit Name</Button>
+              </Link>
+
+              <Button variant="danger" onClick={() => onClickDeleteList(list)}>
+                <i className="fas fa-trash-alt" />
+              </Button>
+            </Card.Body>
+          </Card>
+        ))}
+        {completeLists().length > 0 && <h4 className="mb-1">Completed</h4>}
+        {completeLists().map((list) => (
+          <Card className="mb-3">
+            <Card.Body>
+              <Card.Title>{list.name}</Card.Title>
+              <Link to={`/grocerylists/${list.id}`} className="mr-1">
+                <Button variant="primary">View List</Button>
+              </Link>
+              <Link to={`/grocerylists/${list.id}/edit`} className="mr-1">
+                <Button variant="secondary">Edit Name</Button>
               </Link>
 
               <Button variant="danger" onClick={() => onClickDeleteList(list)}>

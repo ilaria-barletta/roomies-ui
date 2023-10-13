@@ -10,7 +10,7 @@ import {
   Spinner,
 } from "react-bootstrap";
 
-const GroceryListItems = ({ listId }) => {
+const GroceryListItems = ({ listId, isListComplete }) => {
   const [items, setItems] = useState();
   const [showDeleteItemPopup, setShowDeleteItemPopup] = useState(false);
   const [showItemStatusPopup, setShowItemStatusPopup] = useState(false);
@@ -157,6 +157,7 @@ const GroceryListItems = ({ listId }) => {
             variant="secondary"
             id="manage-item-button"
             title="Item Actions"
+            disabled={isListComplete}
           >
             <Dropdown.Item onClick={() => showChangeItemStatusPopup(item)}>
               {item.is_complete ? "Mark as incomplete" : "Mark as complete"}
