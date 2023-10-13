@@ -35,7 +35,7 @@ const GroceryList = () => {
 
   return (
     <>
-      <GroceryListDetails list={list} onDeleteList={goBack} />
+      <GroceryListDetails list={list} onListChanged={goBack} />
       <div className="mt-5">
         <Button onClick={goBack}>Back</Button>
       </div>

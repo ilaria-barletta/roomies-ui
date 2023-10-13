@@ -124,6 +124,15 @@ const GroceryListItems = ({ listId }) => {
     );
   }
 
+  if (!items || !items.length) {
+    return (
+      <div className="d-flex flex-column mt-4">
+        <h6>Items</h6>
+        <p>There are no items in the list yet.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="d-flex flex-column mt-4">
       <h6>Items</h6>

@@ -22,7 +22,7 @@ const Groceries = ({ householdId }) => {
     loadGroceryLists();
   }, []);
 
-  const onDeleteList = () => {
+  const onListChanged = () => {
     loadGroceryLists();
   };
 
@@ -38,7 +38,7 @@ const Groceries = ({ householdId }) => {
     const listToShow = lists[0];
     return (
       <>
-        <GroceryListDetails list={listToShow} onDeleteList={onDeleteList} />
+        <GroceryListDetails list={listToShow} onListChanged={onListChanged} />
         <Container className="mt-3">
           <Link to={`/households/${householdId}/groceries`}>
             <Button variant="link">

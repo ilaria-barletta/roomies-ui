@@ -1,18 +1,15 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-  Badge,
   DropdownButton,
   Dropdown,
   Container,
-  Spinner,
   Modal,
   Button,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import GroceryListItems from "./GroceryListItems";
 
-const GroceryListDetails = ({ list, onDeleteList }) => {
+const GroceryListDetails = ({ list, onListChanged }) => {
   const [showDeleteListPopup, setShowDeleteListPopup] = useState(false);
 
   const onCloseDeleteListPopup = () => {
@@ -22,7 +19,7 @@ const GroceryListDetails = ({ list, onDeleteList }) => {
   const deleteList = async () => {
     await axios.delete(`/grocerylists/${list.id}/`);
     setShowDeleteListPopup(false);
-    onDeleteList();
+    onListChanged();
   };
 
   const onClickDeleteList = () => {
