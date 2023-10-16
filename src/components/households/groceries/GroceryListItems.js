@@ -9,14 +9,16 @@ import {
   Container,
   Spinner,
 } from "react-bootstrap";
+import GroceryItemFilterButton from "./GroceryItemFilterButton";
 
-const GroceryListItems = ({ listId, isListComplete }) => {
+const GroceryListItems = ({ listId, householdId, isListComplete }) => {
   const [items, setItems] = useState();
   const [showDeleteItemPopup, setShowDeleteItemPopup] = useState(false);
   const [showItemStatusPopup, setShowItemStatusPopup] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [itemToDelete, setItemToDelete] = useState();
   const [itemToChangeStatus, setItemToChangeStatus] = useState();
+  const [filters, setFilters] = useState({ assignee: "" });
 
   const onCloseDeleteItemPopup = () => {
     setItemToDelete(null);
@@ -30,8 +32,9 @@ const GroceryListItems = ({ listId, isListComplete }) => {
 
   const loadItems = async () => {
     setIsLoading(true);
+    const { assignee } = filters;
     const { data } = await axios.get(
-      `/groceryitems/?list=${listId}&ordering=is_complete` // Show is_complete items at the bottom
+      `/groceryitems/?list=${listId}&assignee=${assignee}&ordering=is_complete` // Show is_complete items at the bottom
     );
     setItems(data);
     setIsLoading(false);
@@ -39,7 +42,7 @@ const GroceryListItems = ({ listId, isListComplete }) => {
 
   useEffect(() => {
     loadItems();
-  }, []);
+  }, [filters]);
 
   const deleteItem = async () => {
     await axios.delete(`/groceryitems/${itemToDelete.id}/`);
@@ -124,10 +127,21 @@ const GroceryListItems = ({ listId, isListComplete }) => {
     );
   }
 
+  const heading = (
+    <div className="d-flex justify-content-between mb-3">
+      <h6>Items</h6>
+      <GroceryItemFilterButton
+        householdId={householdId}
+        filters={filters}
+        onFiltersChanged={setFilters}
+      />
+    </div>
+  );
+
   if (!items || !items.length) {
     return (
       <div className="d-flex flex-column mt-4">
-        <h6>Items</h6>
+        {heading}
         <p>There are no items in the list yet.</p>
       </div>
     );
@@ -135,7 +149,7 @@ const GroceryListItems = ({ listId, isListComplete }) => {
 
   return (
     <div className="d-flex flex-column mt-4">
-      <h6>Items</h6>
+      {heading}
       {items.map((item) => (
         <div className="d-flex justify-content-between mb-2">
           <div>

@@ -141,7 +141,11 @@ const GroceryListDetails = ({ list, onListChanged }) => {
       )}
 
       <Container className="mt-3">
-        <GroceryListItems listId={list.id} isListComplete={list.is_complete} />
+        <GroceryListItems
+          listId={list.id}
+          householdId={list.household}
+          isListComplete={list.is_complete}
+        />
       </Container>
 
       {confirmDeleteListPopup}
