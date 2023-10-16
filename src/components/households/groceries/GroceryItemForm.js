@@ -2,11 +2,13 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col, Container, Spinner } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import useHouseholdMembers from "../../../hooks/useHouseholdMembers";
 
 const GroceryItemForm = ({ listId, onItemAdded, existingItem }) => {
   const history = useHistory();
-  const [availableMembers, setAvailableMembers] = useState();
-  const [loading, setIsLoading] = useState(true);
+  const [householdId, setHouseholdId] = useState();
+  const { isLoading: loading, members: availableMembers } =
+    useHouseholdMembers(householdId);
   const [itemData, setItemData] = useState({
     name: existingItem?.name || "",
     assignee: existingItem?.assignee || "",
@@ -26,25 +28,7 @@ const GroceryItemForm = ({ listId, onItemAdded, existingItem }) => {
 
   const loadList = async () => {
     const { data } = await axios.get(`/grocerylists/${listId}/`);
-    return data;
-  };
-
-  const loadHousehold = async (list) => {
-    const { data } = await axios.get(`/households/${list.household}/`);
-    return data;
-  };
-
-  const loadAvailableMembersData = async () => {
-    const list = await loadList();
-    const household = await loadHousehold(list);
-
-    // The user can choose the household members or creator
-    // to assign to the grocery list item
-    const members = household.members.concat([
-      { user: household.creator_id, user_name: household.creator },
-    ]);
-    setAvailableMembers(members);
-    setIsLoading(false);
+    setHouseholdId(data.household);
   };
 
   const goBack = () => {
@@ -53,7 +37,7 @@ const GroceryItemForm = ({ listId, onItemAdded, existingItem }) => {
   };
 
   useEffect(() => {
-    loadAvailableMembersData();
+    loadList();
   }, []);
 
   const handleSubmit = async (event) => {
