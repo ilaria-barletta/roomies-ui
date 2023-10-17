@@ -20,7 +20,7 @@ const NavBar = () => {
       await axios.post("/dj-rest-auth/logout/");
       setCurrentUser(null);
       toast.success("Successfully signed out.");
-      history.push("/signin");
+      history.push("/welcome");
     } catch {
       toast.error("Failed to sign out. Please try again.");
     }

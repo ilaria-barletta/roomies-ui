@@ -17,6 +17,7 @@ import NewGroceryList from "./pages/groceries/NewGroceryList";
 import EditGroceryList from "./pages/groceries/EditGroceryList";
 import NewItemForm from "./pages/groceries/items/NewItem";
 import EditItemForm from "./pages/groceries/items/EditItem";
+import WelcomePage from "./pages/welcome/WelcomePage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Container className="p-4">
         <Switch>
           <Route exact path="/" render={() => <HomePage />} />
+          <Route exact path="/welcome" render={() => <WelcomePage />} />
           <Route exact path="/allhouseholds" render={() => <AllHouseholds />} />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />

@@ -22,7 +22,7 @@ export const CurrentUserProvider = ({ children }) => {
       const { data } = await axiosRes.get("dj-rest-auth/user/");
       setCurrentUser(data);
     } catch (err) {
-      history.push("/signin");
+      history.push("/welcome");
     }
   };
 
@@ -38,7 +38,7 @@ export const CurrentUserProvider = ({ children }) => {
         } catch (err) {
           setCurrentUser((prevCurrentUser) => {
             if (prevCurrentUser) {
-              history.push("/signin");
+              history.push("/welcome");
             }
             return null;
           });
@@ -61,7 +61,7 @@ export const CurrentUserProvider = ({ children }) => {
           } catch (err) {
             setCurrentUser((prevCurrentUser) => {
               if (prevCurrentUser) {
-                history.push("/signin");
+                history.push("/welcome");
               }
               return null;
             });

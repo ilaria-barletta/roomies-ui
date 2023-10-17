@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { axiosReq } from "../../api/axiosDefaults";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import { toast } from "react-toastify";
@@ -32,7 +32,7 @@ const AllHouseholds = () => {
 
   const deleteHousehold = async () => {
     try {
-      await axios.delete(`/households/${householdToDelete.id}/`);
+      await axiosReq.delete(`/households/${householdToDelete.id}/`);
       setShowDeletePopup(false);
       toast.success("Successfully deleted the household.");
       householdDeleted();
@@ -61,7 +61,7 @@ const AllHouseholds = () => {
   );
 
   const loadHouseholds = async () => {
-    const { data } = await axios.get("/households/");
+    const { data } = await axiosReq.get("/households/");
     setHouseHolds(data);
     setIsLoading(false);
   };

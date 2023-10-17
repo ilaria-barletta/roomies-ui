@@ -17,7 +17,7 @@ const HomePage = () => {
   useEffect(() => {
     // Redirect from this page if the user hasn't logged in
     if (!currentUser) {
-      history.push("/signin");
+      history.push("/welcome");
     }
   }, [currentUser, history]);
 
