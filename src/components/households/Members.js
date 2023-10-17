@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button, Modal, Container, Spinner, Form } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 import Badge from "react-bootstrap/Badge";
 
@@ -38,13 +39,18 @@ const Members = ({ creator, isOwner, householdId }) => {
   const onShowDeletePopup = () => setShowDeletePopup(true);
 
   const deleteMember = async () => {
-    await axios.delete(
-      `/households/${householdId}/members/${memberToDelete.id}`
-    );
-    setShowDeletePopup(false);
-    // Refresh the list after delete
-    loadMembers();
-    loadAvailableMembers();
+    try {
+      await axios.delete(
+        `/households/${householdId}/members/${memberToDelete.id}`
+      );
+      setShowDeletePopup(false);
+      // Refresh the list after delete
+      loadMembers();
+      loadAvailableMembers();
+      toast.success("Successfully deleted household member.");
+    } catch {
+      toast.error("Failed to delete household member. Please try again.");
+    }
   };
 
   const clickDeleteMember = (member) => {
@@ -65,8 +71,11 @@ const Members = ({ creator, isOwner, householdId }) => {
       loadMembers();
       loadAvailableMembers();
       setNewMemberToAdd("");
+      toast.success("Successfully added new household member");
     } catch (err) {
-      // TODO: handle errors
+      toast.error(
+        "Failed to add the member to the household. Please try again."
+      );
     }
   };
 
