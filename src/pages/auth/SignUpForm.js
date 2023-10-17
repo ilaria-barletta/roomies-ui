@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { Form, Button, Col, Row, Container } from "react-bootstrap";
 import axios from "axios";
@@ -25,8 +26,10 @@ const SignUpForm = () => {
     event.preventDefault();
     try {
       await axios.post("/dj-rest-auth/registration/", signUpData);
+      toast.success("Successfully signed up.");
       history.push("/signin");
     } catch (err) {
+      toast.error("Failed to sign up. Please try again");
       // TODO: Add errors to top of the form
     }
   };
