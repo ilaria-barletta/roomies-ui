@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
+import Button from "react-bootstrap/Button";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import axios from "axios";
 import HouseholdDetails from "../../components/households/HouseholdDetails";
@@ -46,7 +47,14 @@ const HomePage = () => {
   }
 
   if (!households || !households.length) {
-    return <>There are no household details to show.</>; // TODO: link to new household page here
+    return (
+      <>
+        <p className="mb-3">There are no household details to show.</p>
+        <Link to="/newhousehold">
+          <Button>New Household</Button>
+        </Link>
+      </>
+    );
   }
 
   return (
