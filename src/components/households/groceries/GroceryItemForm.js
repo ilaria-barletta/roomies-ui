@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col, Container, Spinner } from "react-bootstrap";
+import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import useHouseholdMembers from "../../../hooks/useHouseholdMembers";
 
@@ -47,11 +48,26 @@ const GroceryItemForm = ({ listId, onItemAdded, existingItem }) => {
     // this code makes it change the api to use depending
     // on if we are creating or editing
     if (isEditing) {
-      await axios.put(`/groceryitems/${existingItem.id}/`, itemData);
+      try {
+        await axios.put(`/groceryitems/${existingItem.id}/`, itemData);
+        toast.success("Successfully updated the grocery list item.");
+        onItemAdded();
+      } catch {
+        toast.error(
+          "Failed to update the grocery list item. Please try again."
+        );
+      }
     } else {
-      await axios.post("/groceryitems/", itemData);
+      try {
+        await axios.post("/groceryitems/", itemData);
+        toast.success("Successfully created the grocery list item.");
+        onItemAdded();
+      } catch {
+        toast.error(
+          "Failed to create the grocery list item. Please try again."
+        );
+      }
     }
-    onItemAdded();
   };
 
   if (loading) {

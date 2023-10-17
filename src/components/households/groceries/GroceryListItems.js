@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 import {
   Badge,
   DropdownButton,
@@ -46,10 +47,15 @@ const GroceryListItems = ({ listId, householdId, isListComplete }) => {
   }, [filters]);
 
   const deleteItem = async () => {
-    await axios.delete(`/groceryitems/${itemToDelete.id}/`);
-    setItemToDelete(null);
-    setShowDeleteItemPopup(false);
-    loadItems();
+    try {
+      await axios.delete(`/groceryitems/${itemToDelete.id}/`);
+      setItemToDelete(null);
+      setShowDeleteItemPopup(false);
+      loadItems();
+      toast.success("Successfully deleted grocery item.");
+    } catch {
+      toast.error("Failed to delete grocery item. Please try again.");
+    }
   };
 
   const toggleItemCompleted = async () => {
@@ -60,10 +66,17 @@ const GroceryListItems = ({ listId, householdId, isListComplete }) => {
       is_complete: !itemToChangeStatus.is_complete,
     };
 
-    await axios.put(`/groceryitems/${itemToChangeStatus.id}/`, itemData);
-    setItemToChangeStatus(null);
-    setShowItemStatusPopup(false);
-    loadItems();
+    try {
+      await axios.put(`/groceryitems/${itemToChangeStatus.id}/`, itemData);
+      setItemToChangeStatus(null);
+      setShowItemStatusPopup(false);
+      loadItems();
+      toast.success("Successfully updated the grocery item status.");
+    } catch {
+      toast.error(
+        "Failed to update the grocery item status. Please try again."
+      );
+    }
   };
 
   const onClickDeleteItem = (item) => {
