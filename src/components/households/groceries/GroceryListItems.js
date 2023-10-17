@@ -18,7 +18,7 @@ const GroceryListItems = ({ listId, householdId, isListComplete }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [itemToDelete, setItemToDelete] = useState();
   const [itemToChangeStatus, setItemToChangeStatus] = useState();
-  const [filters, setFilters] = useState({ assignee: "" });
+  const [filters, setFilters] = useState({ assignee: "", is_complete: "" });
 
   const onCloseDeleteItemPopup = () => {
     setItemToDelete(null);
@@ -32,9 +32,10 @@ const GroceryListItems = ({ listId, householdId, isListComplete }) => {
 
   const loadItems = async () => {
     setIsLoading(true);
-    const { assignee } = filters;
+    const { assignee, is_complete } = filters;
     const { data } = await axios.get(
-      `/groceryitems/?list=${listId}&assignee=${assignee}&ordering=is_complete` // Show is_complete items at the bottom
+      // Show is_complete items at the bottom
+      `/groceryitems/?list=${listId}&assignee=${assignee}&is_complete=${is_complete}&ordering=is_complete`
     );
     setItems(data);
     setIsLoading(false);

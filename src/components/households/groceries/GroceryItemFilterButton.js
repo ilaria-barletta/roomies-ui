@@ -10,17 +10,22 @@ const GroceryItemFilterButton = ({
   const [showModal, setShowModal] = useState(false);
   const { members } = useHouseholdMembers(householdId);
   const [assignee, setAssignee] = useState(filters.assignee || "");
+  const [isComplete, setIsComplete] = useState(filters.is_complete || "");
 
   const onCloseModal = () => setShowModal(false);
   const onOpenModal = () => setShowModal(true);
 
   const onSaveFilters = () => {
     setShowModal(false);
-    onFiltersChanged({ assignee });
+    onFiltersChanged({ assignee, is_complete: isComplete });
   };
 
   const onAssigneeChange = (e) => {
     setAssignee(e.target.value);
+  };
+
+  const onIsCompleteChange = (e) => {
+    setIsComplete(e.target.value);
   };
 
   const filterPopup = (
@@ -48,6 +53,30 @@ const GroceryItemFilterButton = ({
               value={""}
               onChange={onAssigneeChange}
               checked={assignee === ""}
+              type="radio"
+            />
+          </Form.Group>
+          <Form.Group controlId="is_complete">
+            <Form.Label>Status</Form.Label>
+            <Form.Check
+              label={"Completed"}
+              value={"true"}
+              onChange={onIsCompleteChange}
+              checked={isComplete === "true"}
+              type="radio"
+            />
+            <Form.Check
+              label={"Not Completed"}
+              value={"false"}
+              onChange={onIsCompleteChange}
+              checked={isComplete === "false"}
+              type="radio"
+            />
+            <Form.Check
+              label={"Any"}
+              value={""}
+              onChange={onIsCompleteChange}
+              checked={isComplete === ""}
               type="radio"
             />
           </Form.Group>
