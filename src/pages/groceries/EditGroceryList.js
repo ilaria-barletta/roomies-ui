@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { Form, Button, Col, Row, Container } from "react-bootstrap";
 import axios from "axios";
@@ -39,9 +40,10 @@ const EditGroceryList = () => {
     event.preventDefault();
     try {
       const { data } = await axios.put(`/grocerylists/${id}/`, groceryListData);
-
+      toast.success("Successfully updated the list.");
       history.push(`/grocerylists/${data.id}`);
     } catch (err) {
+      toast.error("Failed to update the list. Please try again.");
       // TODO: Add errors to top of the form
     }
   };

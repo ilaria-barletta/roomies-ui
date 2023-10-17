@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { Form, Button, Col, Row, Container } from "react-bootstrap";
 import axios from "axios";
@@ -31,9 +32,10 @@ const NewGroceryList = () => {
     event.preventDefault();
     try {
       const { data } = await axios.post("/grocerylists/", groceryListData);
-
+      toast.success("Successfully created grocery list.");
       history.push(`/grocerylists/${data.id}`);
     } catch (err) {
+      toast.error("Failed to create the grocery list. Please try again.");
       // TODO: Add errors to top of the form
     }
   };

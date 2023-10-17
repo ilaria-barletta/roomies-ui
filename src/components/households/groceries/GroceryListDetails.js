@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import {
   DropdownButton,
   Dropdown,
@@ -20,9 +21,14 @@ const GroceryListDetails = ({ list, onListChanged }) => {
   };
 
   const deleteList = async () => {
-    await axios.delete(`/grocerylists/${list.id}/`);
-    setShowDeleteListPopup(false);
-    onListChanged();
+    try {
+      await axios.delete(`/grocerylists/${list.id}/`);
+      setShowDeleteListPopup(false);
+      toast.success("Successfully deleted list.");
+      onListChanged();
+    } catch {
+      toast.error("Failed to delete the list. Please try again.");
+    }
   };
 
   const onClickDeleteList = () => {
@@ -34,13 +40,18 @@ const GroceryListDetails = ({ list, onListChanged }) => {
   };
 
   const toggleListStatus = async () => {
-    const listData = {
-      ...list,
-      is_complete: !list.is_complete,
-    };
-    await axios.put(`/grocerylists/${list.id}/`, listData);
-    setShowChangeListStatusPopup(false);
-    onListChanged();
+    try {
+      const listData = {
+        ...list,
+        is_complete: !list.is_complete,
+      };
+      await axios.put(`/grocerylists/${list.id}/`, listData);
+      toast.success("Successfully updated the list status.");
+      setShowChangeListStatusPopup(false);
+      onListChanged();
+    } catch {
+      toast.error("Failed to update the list status. Please try again.");
+    }
   };
 
   const onClickChangeListStatus = () => {

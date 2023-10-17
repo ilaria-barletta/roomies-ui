@@ -17,8 +17,7 @@ const GroceryList = () => {
   };
 
   const goBack = () => {
-    // Found here: https://v5.reactrouter.com/web/api/history
-    history.goBack();
+    history.push(`/households/${list.household}/groceries`);
   };
 
   useEffect(() => {
