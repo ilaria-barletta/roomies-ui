@@ -43,6 +43,13 @@ const GroceryItemFilterButton = ({
                 />
               );
             })}
+            <Form.Check
+              label={"Anyone"}
+              value={""}
+              onChange={onAssigneeChange}
+              checked={assignee === ""}
+              type="radio"
+            />
           </Form.Group>
         </Form>
       </Modal.Body>
