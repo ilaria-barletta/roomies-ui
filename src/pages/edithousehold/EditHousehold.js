@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { Form, Button, Col, Row, Container } from "react-bootstrap";
 import axios from "axios";
@@ -35,9 +36,10 @@ const EditHouseholdForm = () => {
     event.preventDefault();
     try {
       await axios.put(`/households/${id}/`, householdData);
-
+      toast.success("Successfully updated the household.");
       history.push("/allhouseholds");
     } catch (err) {
+      toast.error("Failed to update the household. Please try again.");
       // TODO: Add errors to top of the form
     }
   };

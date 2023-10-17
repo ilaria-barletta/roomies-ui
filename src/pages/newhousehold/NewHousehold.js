@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { Form, Button, Col, Row, Container } from "react-bootstrap";
 import axios from "axios";
@@ -25,9 +26,10 @@ const NewHouseholdForm = () => {
     event.preventDefault();
     try {
       await axios.post("/households/", householdData);
-
+      toast.success("Successfully created a new household.");
       history.push("/allhouseholds");
     } catch (err) {
+      toast.error("Failed to create the household. Please try again.");
       // TODO: Add errors to top of the form
     }
   };

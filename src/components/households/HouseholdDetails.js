@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -22,9 +23,14 @@ const HouseholdDetails = ({ household, householdDeleted }) => {
   const isOwner = currentUser?.username === household.creator;
 
   const deleteHousehold = async () => {
-    await axios.delete(`/households/${household.id}/`);
-    setShowDeletePopup(false);
-    householdDeleted();
+    try {
+      await axios.delete(`/households/${household.id}/`);
+      setShowDeletePopup(false);
+      toast.success("Successfully deleted the household.");
+      householdDeleted();
+    } catch {
+      toast.error("Failed to delete the household. Please try again.");
+    }
   };
 
   const confirmDeletePopup = (
