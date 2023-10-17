@@ -1,4 +1,6 @@
 import { Container } from "react-bootstrap";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import NavBar from "./components/Navbar";
 import { Switch, Route } from "react-router-dom";
@@ -69,6 +71,7 @@ function App() {
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>
+      <ToastContainer />
     </div>
   );
 }
