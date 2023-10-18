@@ -10,6 +10,7 @@ import Members from "./Members";
 import axios from "axios";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Groceries from "./groceries/Groceries";
+import { Alert } from "react-bootstrap";
 
 const HouseholdDetails = ({ household, householdDeleted }) => {
   const currentUser = useCurrentUser();
@@ -21,6 +22,9 @@ const HouseholdDetails = ({ household, householdDeleted }) => {
 
   // Validate that the owner is the only one that can do household actions
   const isOwner = currentUser?.username === household.creator;
+  const householdMember = household.members.find(
+    (m) => m.user === currentUser?.id
+  );
 
   const deleteHousehold = async () => {
     try {
@@ -49,6 +53,27 @@ const HouseholdDetails = ({ household, householdDeleted }) => {
       </Modal.Footer>
     </Modal>
   );
+
+  const rentWarningBanner = () => {
+    const banner = (
+      <Alert variant="warning">
+        Rent is due for this household. Please mark your rent as paid in the
+        rent section below
+      </Alert>
+    );
+
+    if (!household.rent_is_due) {
+      return null;
+    }
+
+    if (isOwner && !household.creator_has_paid_rent) {
+      return banner;
+    } else if (householdMember && !householdMember.has_paid_rent) {
+      return banner;
+    }
+
+    return null;
+  };
 
   return (
     <>
@@ -80,6 +105,7 @@ const HouseholdDetails = ({ household, householdDeleted }) => {
           </DropdownButton>
         </div>
       </div>
+      {rentWarningBanner()}
       <Accordion defaultActiveKey="0">
         <Card>
           <Card.Header>
