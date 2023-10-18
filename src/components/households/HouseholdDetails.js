@@ -11,8 +11,13 @@ import axios from "axios";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Groceries from "./groceries/Groceries";
 import { Alert } from "react-bootstrap";
+import Rent from "./rent/Rent";
 
-const HouseholdDetails = ({ household, householdDeleted }) => {
+const HouseholdDetails = ({
+  household,
+  householdDeleted,
+  householdChanged,
+}) => {
   const currentUser = useCurrentUser();
   const [showDeletePopup, setShowDeletePopup] = useState(false);
 
@@ -23,7 +28,7 @@ const HouseholdDetails = ({ household, householdDeleted }) => {
   // Validate that the owner is the only one that can do household actions
   const isOwner = currentUser?.username === household.creator;
   const householdMember = household.members.find(
-    (m) => m.user === currentUser?.id
+    (m) => m.user === currentUser?.pk
   );
 
   const deleteHousehold = async () => {
@@ -62,12 +67,22 @@ const HouseholdDetails = ({ household, householdDeleted }) => {
       </Alert>
     );
 
+    const creatorCollectionBanner = (
+      <Alert variant="warning">
+        Rent is due for this household. You have paid your share. Please remind
+        household members to pay their rent. You can mark the rent as collected
+        in the Rent section below once everyone has paid.
+      </Alert>
+    );
+
     if (!household.rent_is_due) {
       return null;
     }
 
     if (isOwner && !household.creator_has_paid_rent) {
       return banner;
+    } else if (isOwner) {
+      return creatorCollectionBanner;
     } else if (householdMember && !householdMember.has_paid_rent) {
       return banner;
     }
@@ -131,8 +146,7 @@ const HouseholdDetails = ({ household, householdDeleted }) => {
           </Card.Header>
           <Accordion.Collapse eventKey="1">
             <Card.Body>
-              <p>Rent amount: {household.rent}</p>
-              <p>Rent due day: {household.rent_due_day}</p>
+              <Rent household={household} householdChanged={householdChanged} />
             </Card.Body>
           </Accordion.Collapse>
         </Card>

@@ -38,6 +38,12 @@ const HomePage = () => {
     loadHouseholds();
   };
 
+  // Reload the list when a household is changed
+  // e.g when the rent is marked as due
+  const householdChanged = () => {
+    loadHouseholds();
+  };
+
   if (isLoading) {
     return (
       <Container className="d-flex justify-content-center">
@@ -62,6 +68,7 @@ const HomePage = () => {
       <HouseholdDetails
         household={households[0]}
         householdDeleted={householdDeleted}
+        householdChanged={householdChanged}
       />
       {households.length > 1 && (
         <Container className="mt-3">

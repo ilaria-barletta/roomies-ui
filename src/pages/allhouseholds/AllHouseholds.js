@@ -61,6 +61,7 @@ const AllHouseholds = () => {
   );
 
   const loadHouseholds = async () => {
+    setIsLoading(true);
     const { data } = await axiosReq.get("/households/");
     setHouseHolds(data);
     setIsLoading(false);
@@ -84,6 +85,15 @@ const AllHouseholds = () => {
     viewAllHouseholds();
   };
 
+  // Reload the list when a household is changed
+  const householdChanged = async () => {
+    await loadHouseholds();
+    const updatedCurrentHousehold = households.find(
+      (h) => h.id === currentHouseholdDetails?.id
+    );
+    setCurrentHouseholdDetails(updatedCurrentHousehold);
+  };
+
   if (isLoading) {
     return (
       <Container className="d-flex justify-content-center">
@@ -102,6 +112,7 @@ const AllHouseholds = () => {
         <HouseholdDetails
           household={currentHouseholdDetails}
           householdDeleted={householdDeleted}
+          householdChanged={householdChanged}
         />
         <Container className="mt-3">
           <Button variant="link" onClick={viewAllHouseholds}>
