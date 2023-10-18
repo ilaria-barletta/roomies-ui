@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { axiosReq } from "../../../api/axiosDefaults";
 import { toast } from "react-toastify";
 import {
   Badge,
@@ -34,7 +34,7 @@ const GroceryListItems = ({ listId, householdId, isListComplete }) => {
   const loadItems = async () => {
     setIsLoading(true);
     const { assignee, is_complete } = filters;
-    const { data } = await axios.get(
+    const { data } = await axiosReq.get(
       // Show is_complete items at the bottom
       `/groceryitems/?list=${listId}&assignee=${assignee}&is_complete=${is_complete}&ordering=is_complete`
     );
@@ -48,7 +48,7 @@ const GroceryListItems = ({ listId, householdId, isListComplete }) => {
 
   const deleteItem = async () => {
     try {
-      await axios.delete(`/groceryitems/${itemToDelete.id}/`);
+      await axiosReq.delete(`/groceryitems/${itemToDelete.id}/`);
       setItemToDelete(null);
       setShowDeleteItemPopup(false);
       loadItems();
@@ -67,7 +67,7 @@ const GroceryListItems = ({ listId, householdId, isListComplete }) => {
     };
 
     try {
-      await axios.put(`/groceryitems/${itemToChangeStatus.id}/`, itemData);
+      await axiosReq.put(`/groceryitems/${itemToChangeStatus.id}/`, itemData);
       setItemToChangeStatus(null);
       setShowItemStatusPopup(false);
       loadItems();

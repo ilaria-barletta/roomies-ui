@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { axiosReq } from "../../../api/axiosDefaults";
 import { Button, Container, Spinner } from "react-bootstrap";
 import GroceryListDetails from "./GroceryListDetails";
 import { Link } from "react-router-dom";
@@ -11,7 +11,7 @@ const Groceries = ({ householdId }) => {
   // Get grocery lists for the household that aren't complete
   const loadGroceryLists = async () => {
     setIsLoading(true);
-    const { data } = await axios.get(
+    const { data } = await axiosReq.get(
       `/grocerylists/?household=${householdId}&is_complete=false`
     );
     setLists(data);

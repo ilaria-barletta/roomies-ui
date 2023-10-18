@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { Form, Button, Col, Row, Container } from "react-bootstrap";
-import axios from "axios";
+import { axiosReq } from "../../api/axiosDefaults";
 
 const EditGroceryList = () => {
   const { id } = useParams();
@@ -28,7 +28,7 @@ const EditGroceryList = () => {
   };
 
   const loadGroceryList = async () => {
-    const { data } = await axios.get(`/grocerylists/${id}/`);
+    const { data } = await axiosReq.get(`/grocerylists/${id}/`);
     setGroceryListData(data);
   };
 
@@ -39,7 +39,10 @@ const EditGroceryList = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await axios.put(`/grocerylists/${id}/`, groceryListData);
+      const { data } = await axiosReq.put(
+        `/grocerylists/${id}/`,
+        groceryListData
+      );
       toast.success("Successfully updated the list.");
       history.push(`/grocerylists/${data.id}`);
     } catch (err) {

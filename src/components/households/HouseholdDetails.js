@@ -7,7 +7,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import Modal from "react-bootstrap/Modal";
 import Members from "./Members";
-import axios from "axios";
+import { axiosReq } from "../../api/axiosDefaults";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Groceries from "./groceries/Groceries";
 import { Alert } from "react-bootstrap";
@@ -33,7 +33,7 @@ const HouseholdDetails = ({
 
   const deleteHousehold = async () => {
     try {
-      await axios.delete(`/households/${household.id}/`);
+      await axiosReq.delete(`/households/${household.id}/`);
       setShowDeletePopup(false);
       toast.success("Successfully deleted the household.");
       householdDeleted();

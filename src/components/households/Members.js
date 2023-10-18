@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { axiosReq } from "../../api/axiosDefaults";
 import { Button, Modal, Container, Spinner, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 
@@ -14,13 +14,13 @@ const Members = ({ creator, isOwner, householdId }) => {
   const [newMemberToAdd, setNewMemberToAdd] = useState();
 
   const loadMembers = async () => {
-    const { data } = await axios.get(`/households/${householdId}/members`);
+    const { data } = await axiosReq.get(`/households/${householdId}/members`);
     setMembers(data);
     setIsLoading(false);
   };
 
   const loadAvailableMembers = async () => {
-    const { data } = await axios.get(
+    const { data } = await axiosReq.get(
       `/households/${householdId}/availableusers`
     );
     setAvailableMembers(data);
@@ -40,7 +40,7 @@ const Members = ({ creator, isOwner, householdId }) => {
 
   const deleteMember = async () => {
     try {
-      await axios.delete(
+      await axiosReq.delete(
         `/households/${householdId}/members/${memberToDelete.id}`
       );
       setShowDeletePopup(false);
@@ -65,7 +65,7 @@ const Members = ({ creator, isOwner, householdId }) => {
   const onNewMemberFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post(`/households/${householdId}/members`, {
+      await axiosReq.post(`/households/${householdId}/members`, {
         user: newMemberToAdd,
       });
       loadMembers();

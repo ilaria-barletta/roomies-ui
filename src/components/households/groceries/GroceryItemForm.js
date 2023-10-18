@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axiosReq } from "../../../api/axiosDefaults";
 import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col, Container, Spinner } from "react-bootstrap";
 import { toast } from "react-toastify";
@@ -28,7 +28,7 @@ const GroceryItemForm = ({ listId, onItemAdded, existingItem }) => {
   };
 
   const loadList = async () => {
-    const { data } = await axios.get(`/grocerylists/${listId}/`);
+    const { data } = await axiosReq.get(`/grocerylists/${listId}/`);
     setHouseholdId(data.household);
   };
 
@@ -49,7 +49,7 @@ const GroceryItemForm = ({ listId, onItemAdded, existingItem }) => {
     // on if we are creating or editing
     if (isEditing) {
       try {
-        await axios.put(`/groceryitems/${existingItem.id}/`, itemData);
+        await axiosReq.put(`/groceryitems/${existingItem.id}/`, itemData);
         toast.success("Successfully updated the grocery list item.");
         onItemAdded();
       } catch {
@@ -59,7 +59,7 @@ const GroceryItemForm = ({ listId, onItemAdded, existingItem }) => {
       }
     } else {
       try {
-        await axios.post("/groceryitems/", itemData);
+        await axiosReq.post("/groceryitems/", itemData);
         toast.success("Successfully created the grocery list item.");
         onItemAdded();
       } catch {

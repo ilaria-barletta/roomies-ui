@@ -3,7 +3,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { Form, Button, Col, Row, Container } from "react-bootstrap";
-import axios from "axios";
+import { axiosReq } from "../../api/axiosDefaults";
 
 const EditHouseholdForm = () => {
   const [householdData, setHouseholdData] = useState({
@@ -17,7 +17,7 @@ const EditHouseholdForm = () => {
   const history = useHistory();
 
   const loadHousehold = async () => {
-    const { data } = await axios.get(`/households/${id}/`);
+    const { data } = await axiosReq.get(`/households/${id}/`);
     setHouseholdData(data);
   };
 
@@ -35,7 +35,7 @@ const EditHouseholdForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.put(`/households/${id}/`, householdData);
+      await axiosReq.put(`/households/${id}/`, householdData);
       toast.success("Successfully updated the household.");
       history.push("/allhouseholds");
     } catch (err) {

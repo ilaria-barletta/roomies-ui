@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { Form, Button, Col, Row, Container } from "react-bootstrap";
-import axios from "axios";
+import { axiosReq } from "../../api/axiosDefaults";
 
 const NewGroceryList = () => {
   const { id: householdId } = useParams();
@@ -31,7 +31,7 @@ const NewGroceryList = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await axios.post("/grocerylists/", groceryListData);
+      const { data } = await axiosReq.post("/grocerylists/", groceryListData);
       toast.success("Successfully created grocery list.");
       history.push(`/grocerylists/${data.id}`);
     } catch (err) {

@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { Form, Button, Col, Row, Container } from "react-bootstrap";
-import axios from "axios";
+import { axiosReq } from "../../api/axiosDefaults";
 
 const NewHouseholdForm = () => {
   const [householdData, setHouseholdData] = useState({
@@ -25,7 +25,7 @@ const NewHouseholdForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("/households/", householdData);
+      await axiosReq.post("/households/", householdData);
       toast.success("Successfully created a new household.");
       history.push("/allhouseholds");
     } catch (err) {

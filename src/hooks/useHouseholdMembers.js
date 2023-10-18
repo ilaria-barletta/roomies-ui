@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { axiosReq } from "../api/axiosDefaults";
 
 const useHouseholdMembers = (householdId) => {
   const [members, setMembers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const loadHousehold = async () => {
-    const { data } = await axios.get(`/households/${householdId}/`);
+    const { data } = await axiosReq.get(`/households/${householdId}/`);
     return data;
   };
 

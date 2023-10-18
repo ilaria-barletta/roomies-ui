@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { axiosReq } from "../../api/axiosDefaults";
 import { useParams, Link } from "react-router-dom";
 import { Container, Spinner, Card, Button, Modal } from "react-bootstrap";
 
@@ -22,14 +22,16 @@ const GroceryLists = () => {
   };
 
   const deleteList = async () => {
-    await axios.delete(`/grocerylists/${listToDelete.id}/`);
+    await axiosReq.delete(`/grocerylists/${listToDelete.id}/`);
     setShowDeleteListPopup(false);
     loadGroceryLists();
   };
 
   // Get all grocery lists for the household
   const loadGroceryLists = async () => {
-    const { data } = await axios.get(`/grocerylists/?household=${householdId}`);
+    const { data } = await axiosReq.get(
+      `/grocerylists/?household=${householdId}`
+    );
     setLists(data);
     setIsLoading(false);
   };

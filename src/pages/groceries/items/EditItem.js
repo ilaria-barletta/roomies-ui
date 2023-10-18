@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axiosReq } from "../../../api/axiosDefaults";
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import GroceryItemForm from "../../../components/households/groceries/GroceryItemForm";
@@ -9,7 +9,7 @@ const EditItemForm = () => {
   const [item, setItem] = useState();
 
   const loadItem = async () => {
-    const { data } = await axios.get(`/groceryitems/${itemId}/`);
+    const { data } = await axiosReq.get(`/groceryitems/${itemId}/`);
     setItem(data);
   };
 

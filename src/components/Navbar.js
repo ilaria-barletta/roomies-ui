@@ -7,7 +7,7 @@ import {
   useSetCurrentUser,
 } from "../contexts/CurrentUserContext";
 import { NavDropdown } from "react-bootstrap";
-import axios from "axios";
+import { axiosReq } from "../api/axiosDefaults";
 import { toast } from "react-toastify";
 
 const NavBar = () => {
@@ -17,7 +17,7 @@ const NavBar = () => {
 
   const signOut = async () => {
     try {
-      await axios.post("/dj-rest-auth/logout/");
+      await axiosReq.post("/dj-rest-auth/logout/");
       setCurrentUser(null);
       toast.success("Successfully signed out.");
       history.push("/welcome");

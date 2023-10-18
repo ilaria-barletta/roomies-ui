@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axiosReq } from "../../../api/axiosDefaults";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import {
@@ -22,7 +22,7 @@ const GroceryListDetails = ({ list, onListChanged }) => {
 
   const deleteList = async () => {
     try {
-      await axios.delete(`/grocerylists/${list.id}/`);
+      await axiosReq.delete(`/grocerylists/${list.id}/`);
       setShowDeleteListPopup(false);
       toast.success("Successfully deleted list.");
       onListChanged();
@@ -45,7 +45,7 @@ const GroceryListDetails = ({ list, onListChanged }) => {
         ...list,
         is_complete: !list.is_complete,
       };
-      await axios.put(`/grocerylists/${list.id}/`, listData);
+      await axiosReq.put(`/grocerylists/${list.id}/`, listData);
       toast.success("Successfully updated the list status.");
       setShowChangeListStatusPopup(false);
       onListChanged();

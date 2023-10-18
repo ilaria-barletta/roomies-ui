@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axiosReq } from "../../api/axiosDefaults";
 import React, { useEffect, useState } from "react";
 import { Button, Container, Spinner } from "react-bootstrap";
 import { useParams, useHistory } from "react-router-dom";
@@ -11,7 +11,7 @@ const GroceryList = () => {
   const history = useHistory();
 
   const loadList = async () => {
-    const { data } = await axios.get(`/grocerylists/${id}/`);
+    const { data } = await axiosReq.get(`/grocerylists/${id}/`);
     setList(data);
     setIsLoading(false);
   };

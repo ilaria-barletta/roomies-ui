@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
 import Button from "react-bootstrap/Button";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import axios from "axios";
+import { axiosReq } from "../../api/axiosDefaults";
 import HouseholdDetails from "../../components/households/HouseholdDetails";
 
 const HomePage = () => {
@@ -22,7 +22,7 @@ const HomePage = () => {
   }, [currentUser, history]);
 
   const loadHouseholds = async () => {
-    const { data } = await axios.get("/households/");
+    const { data } = await axiosReq.get("/households/");
     setHouseHolds(data);
     setIsLoading(false);
   };
