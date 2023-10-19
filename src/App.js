@@ -18,6 +18,7 @@ import EditGroceryList from "./pages/groceries/EditGroceryList";
 import NewItemForm from "./pages/groceries/items/NewItem";
 import EditItemForm from "./pages/groceries/items/EditItem";
 import WelcomePage from "./pages/welcome/WelcomePage";
+import NotFound from "./pages/notfound/NotFound";
 
 function App() {
   return (
@@ -70,7 +71,7 @@ function App() {
             path="/households/:id/newgrocerylist"
             render={() => <NewGroceryList />}
           />
-          <Route render={() => <p>Page not found!</p>} />
+          <Route render={() => <NotFound />} />
         </Switch>
       </Container>
       <ToastContainer />
