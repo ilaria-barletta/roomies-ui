@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { Form, Button, Col, Row, Container } from "react-bootstrap";
+import { Form, Button, Col, Row, Container, Alert } from "react-bootstrap";
 import { axiosReq } from "../../api/axiosDefaults";
 
 const NewGroceryList = () => {
@@ -12,6 +12,7 @@ const NewGroceryList = () => {
     is_complete: false,
     household: householdId,
   });
+  const [errors, setErrors] = useState({});
   const { name } = groceryListData;
 
   const history = useHistory();
@@ -36,7 +37,7 @@ const NewGroceryList = () => {
       history.push(`/grocerylists/${data.id}`);
     } catch (err) {
       toast.error("Failed to create the grocery list. Please try again.");
-      // TODO: Add errors to top of the form
+      setErrors(err.response?.data);
     }
   };
 
@@ -57,6 +58,12 @@ const NewGroceryList = () => {
                 onChange={handleChange}
               />
             </Form.Group>
+
+            {errors.name?.map((message, idx) => (
+              <Alert key={idx} variant="warning">
+                {message}
+              </Alert>
+            ))}
 
             <Button variant="primary" type="submit">
               Create
