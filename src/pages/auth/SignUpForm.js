@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { Form, Button, Col, Row, Container } from "react-bootstrap";
+import { Form, Button, Col, Row, Container, Alert } from "react-bootstrap";
 import axios from "axios";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 const SignUpForm = () => {
   const [signUpData, setSignUpData] = useState({
@@ -11,9 +12,18 @@ const SignUpForm = () => {
     password1: "",
     password2: "",
   });
+  const currentUser = useCurrentUser();
+  const [errors, setErrors] = useState({});
   const { username, password1, password2 } = signUpData;
 
   const history = useHistory();
+
+  useEffect(() => {
+    // Go to the home page if the user has already logged in
+    if (currentUser) {
+      history.push("/");
+    }
+  }, [currentUser, history]);
 
   const handleChange = (event) => {
     setSignUpData({
@@ -30,7 +40,7 @@ const SignUpForm = () => {
       history.push("/signin");
     } catch (err) {
       toast.error("Failed to sign up. Please try again");
-      // TODO: Add errors to top of the form
+      setErrors(err.response?.data);
     }
   };
 
@@ -52,6 +62,12 @@ const SignUpForm = () => {
               />
             </Form.Group>
 
+            {errors.username?.map((message, idx) => (
+              <Alert key={idx} variant="warning">
+                {message}
+              </Alert>
+            ))}
+
             <Form.Group controlId="password1">
               <Form.Label className="d-none">Password</Form.Label>
               <Form.Control
@@ -62,6 +78,12 @@ const SignUpForm = () => {
                 onChange={handleChange}
               />
             </Form.Group>
+
+            {errors.password1?.map((message, idx) => (
+              <Alert key={idx} variant="warning">
+                {message}
+              </Alert>
+            ))}
 
             <Form.Group controlId="password2">
               <Form.Label className="d-none">Confirm password</Form.Label>
@@ -74,9 +96,21 @@ const SignUpForm = () => {
               />
             </Form.Group>
 
+            {errors.password2?.map((message, idx) => (
+              <Alert key={idx} variant="warning">
+                {message}
+              </Alert>
+            ))}
+
             <Button variant="primary" type="submit">
               Sign up
             </Button>
+
+            {errors.non_field_errors?.map((message, idx) => (
+              <Alert key={idx} variant="warning" className="mt-3">
+                {message}
+              </Alert>
+            ))}
           </Form>
         </Container>
 
