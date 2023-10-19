@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { Form, Button, Col, Row, Container } from "react-bootstrap";
+import { Form, Button, Col, Row, Container, Alert } from "react-bootstrap";
 import { axiosReq } from "../../api/axiosDefaults";
 
 const EditHouseholdForm = () => {
@@ -12,7 +12,8 @@ const EditHouseholdForm = () => {
     rent_due_day: 1,
   });
   const { id } = useParams();
-  const { name, rent, rent_due_day } = householdData;
+  const [errors, setErrors] = useState({});
+  const { name, rent } = householdData;
 
   const history = useHistory();
 
@@ -40,7 +41,7 @@ const EditHouseholdForm = () => {
       history.push("/allhouseholds");
     } catch (err) {
       toast.error("Failed to update the household. Please try again.");
-      // TODO: Add errors to top of the form
+      setErrors(err.response?.data);
     }
   };
 
@@ -62,6 +63,12 @@ const EditHouseholdForm = () => {
               />
             </Form.Group>
 
+            {errors.name?.map((message, idx) => (
+              <Alert key={idx} variant="warning">
+                {message}
+              </Alert>
+            ))}
+
             <Form.Group controlId="rent">
               <Form.Label>Rent</Form.Label>
               <Form.Control
@@ -73,16 +80,11 @@ const EditHouseholdForm = () => {
               />
             </Form.Group>
 
-            <Form.Group controlId="rent_due_day">
-              <Form.Label>Rent Due Day</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Rent Due Day"
-                name="rent_due_day"
-                value={rent_due_day}
-                onChange={handleChange}
-              />
-            </Form.Group>
+            {errors.rent?.map((message, idx) => (
+              <Alert key={idx} variant="warning">
+                {message}
+              </Alert>
+            ))}
 
             <Button variant="primary" type="submit">
               Edit
