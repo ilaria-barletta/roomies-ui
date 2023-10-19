@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { Form, Button, Col, Row, Container } from "react-bootstrap";
+import { Form, Button, Col, Row, Container, Alert } from "react-bootstrap";
 import axios from "axios";
 import {
   useCurrentUser,
@@ -17,6 +17,7 @@ const SignInForm = () => {
   const { username, password } = signInData;
   const setCurrentUser = useSetCurrentUser();
   const currentUser = useCurrentUser();
+  const [errors, setErrors] = useState({});
 
   const history = useHistory();
 
@@ -43,7 +44,7 @@ const SignInForm = () => {
       history.push("/");
     } catch (err) {
       toast.error("Failed to sign in. Please try again.");
-      // TODO: Add errors to top of the form
+      setErrors(err.response?.data);
     }
   };
 
@@ -65,6 +66,12 @@ const SignInForm = () => {
               />
             </Form.Group>
 
+            {errors.username?.map((message, idx) => (
+              <Alert key={idx} variant="warning">
+                {message}
+              </Alert>
+            ))}
+
             <Form.Group controlId="password1">
               <Form.Label className="d-none">Password</Form.Label>
               <Form.Control
@@ -75,6 +82,12 @@ const SignInForm = () => {
                 onChange={handleChange}
               />
             </Form.Group>
+
+            {errors.password?.map((message, idx) => (
+              <Alert key={idx} variant="warning">
+                {message}
+              </Alert>
+            ))}
 
             <Button variant="primary" type="submit">
               Sign in
