@@ -19,6 +19,7 @@ import NewItemForm from "./pages/groceries/items/NewItem";
 import EditItemForm from "./pages/groceries/items/EditItem";
 import WelcomePage from "./pages/welcome/WelcomePage";
 import NotFound from "./pages/notfound/NotFound";
+import NewHouseholdMember from "./pages/newhouseholdmember/NewHouseholdMember";
 
 function App() {
   return (
@@ -70,6 +71,11 @@ function App() {
             exact
             path="/households/:id/newgrocerylist"
             render={() => <NewGroceryList />}
+          />
+          <Route
+            exact
+            path="/households/:id/newmember"
+            render={() => <NewHouseholdMember />}
           />
           <Route render={() => <NotFound />} />
         </Switch>

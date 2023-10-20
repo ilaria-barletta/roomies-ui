@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
-import { Button, Modal, Container, Spinner, Form } from "react-bootstrap";
+import {
+  Button,
+  Modal,
+  Container,
+  Spinner,
+  Dropdown,
+  DropdownButton,
+} from "react-bootstrap";
 import { toast } from "react-toastify";
 
 import Badge from "react-bootstrap/Badge";
 
 const Members = ({ creator, isOwner, householdId }) => {
   const [members, setMembers] = useState();
-  const [availableMembers, setAvailableMembers] = useState();
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [memberToDelete, setMemberToDelete] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [newMemberToAdd, setNewMemberToAdd] = useState();
 
   const loadMembers = async () => {
     const { data } = await axiosReq.get(`/households/${householdId}/members`);
@@ -19,16 +24,8 @@ const Members = ({ creator, isOwner, householdId }) => {
     setIsLoading(false);
   };
 
-  const loadAvailableMembers = async () => {
-    const { data } = await axiosReq.get(
-      `/households/${householdId}/availableusers`
-    );
-    setAvailableMembers(data);
-  };
-
   useEffect(() => {
     loadMembers();
-    loadAvailableMembers();
   }, []);
 
   const onCloseDeletePopup = () => {
@@ -46,7 +43,6 @@ const Members = ({ creator, isOwner, householdId }) => {
       setShowDeletePopup(false);
       // Refresh the list after delete
       loadMembers();
-      loadAvailableMembers();
       toast.success("Successfully deleted household member.");
     } catch {
       toast.error("Failed to delete household member. Please try again.");
@@ -56,27 +52,6 @@ const Members = ({ creator, isOwner, householdId }) => {
   const clickDeleteMember = (member) => {
     setMemberToDelete(member);
     onShowDeletePopup();
-  };
-
-  const onNewMemberToAddSelected = (event) => {
-    setNewMemberToAdd(event.target.value);
-  };
-
-  const onNewMemberFormSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      await axiosReq.post(`/households/${householdId}/members`, {
-        user: newMemberToAdd,
-      });
-      loadMembers();
-      loadAvailableMembers();
-      setNewMemberToAdd("");
-      toast.success("Successfully added new household member");
-    } catch (err) {
-      toast.error(
-        "Failed to add the member to the household. Please try again."
-      );
-    }
   };
 
   const confirmDeletePopup = (
@@ -108,6 +83,14 @@ const Members = ({ creator, isOwner, householdId }) => {
 
   return (
     <>
+      <div className="d-flex justify-content-between mb-3">
+        <h4>Members</h4>
+        <DropdownButton id="manage-household-button" title="Members Actions">
+          <Dropdown.Item href={`/households/${householdId}/newmember`}>
+            Add a new member
+          </Dropdown.Item>
+        </DropdownButton>
+      </div>
       <div className="mb-1">
         {creator} <Badge variant="primary">Creator</Badge>
       </div>
@@ -123,31 +106,6 @@ const Members = ({ creator, isOwner, householdId }) => {
           )}
         </div>
       ))}
-
-      <Container className="mt-3">
-        <Form onSubmit={onNewMemberFormSubmit}>
-          <Form.Group controlId="exampleForm.SelectCustom">
-            <Form.Label>Add a new member</Form.Label>
-            <Form.Control
-              as="select"
-              custom
-              value={newMemberToAdd}
-              onChange={onNewMemberToAddSelected}
-            >
-              {availableMembers?.map((member) => (
-                <option value={member.id}>{member.username}</option>
-              ))}
-              <option value="">
-                Please select the member you would like to add
-              </option>
-            </Form.Control>
-          </Form.Group>
-
-          <Button variant="primary" type="submit">
-            Add
-          </Button>
-        </Form>
-      </Container>
 
       {confirmDeletePopup}
     </>
