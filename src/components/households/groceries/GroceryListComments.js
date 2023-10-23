@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { axiosReq } from "../../../api/axiosDefaults";
 import { toast } from "react-toastify";
-import { Modal, Button, Container, Spinner } from "react-bootstrap";
+import {
+  Modal,
+  Button,
+  Container,
+  Spinner,
+  DropdownButton,
+  Dropdown,
+} from "react-bootstrap";
 import { useCurrentUser } from "../../../contexts/CurrentUserContext";
 
 const GroceryListComments = ({ listId }) => {
@@ -90,12 +97,16 @@ const GroceryListComments = ({ listId }) => {
             <div className="d-flex justify-content-between">
               {comment.content}
               {comment.creator === currentUser?.username && (
-                <Button
-                  variant="danger"
-                  onClick={() => onClickDeleteComment(comment)}
-                >
-                  <i className="fas fa-trash-alt" />
-                </Button>
+                <DropdownButton title="Manage">
+                  <Dropdown.Item
+                    href={`/grocerylists/${listId}/comments/${comment.id}/edit`}
+                  >
+                    Edit
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => onClickDeleteComment(comment)}>
+                    Delete
+                  </Dropdown.Item>
+                </DropdownButton>
               )}
             </div>
           </div>
