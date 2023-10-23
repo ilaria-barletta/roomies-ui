@@ -125,7 +125,7 @@ const HouseholdDetails = ({
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="0">
-              Members
+              Members <i className="fas fa-users" />
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="0">
@@ -141,7 +141,7 @@ const HouseholdDetails = ({
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="1">
-              Rent
+              Rent <i className="fas fa-money-bill-alt" />
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="1">
@@ -153,7 +153,7 @@ const HouseholdDetails = ({
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="2">
-              Groceries
+              Groceries <i className="fas fa-shopping-basket" />
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="2">
