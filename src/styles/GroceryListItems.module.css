@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+
+.Item {
+    font-family: 'Caveat', sans-serif;
+    font-size: 1.5rem;
+}
+
+.Complete {
+    color: red;
+    /**
+        This style was found here: 
+        https://stackoverflow.com/questions/1107551/css-strikethrough-different-color-from-text
+    */
+    text-decoration: line-through;
+}

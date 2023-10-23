@@ -11,6 +11,7 @@ import {
   Spinner,
 } from "react-bootstrap";
 import GroceryItemFilterButton from "./GroceryItemFilterButton";
+import styles from "../../../styles/GroceryListItems.module.css";
 
 const GroceryListItems = ({ listId, householdId, isListComplete }) => {
   const [items, setItems] = useState();
@@ -167,17 +168,23 @@ const GroceryListItems = ({ listId, householdId, isListComplete }) => {
       {items.map((item) => (
         <div className="d-flex justify-content-between mb-2">
           <div>
-            {/** <s> tag will draw a line through completed items text */}
             {item.is_complete && (
-              <s>
-                {item.name}{" "}
-                <Badge variant="secondary">{item.assignee_name}</Badge>
-              </s>
+              <span>
+                <span className={`${styles.Item} ${styles.Complete}`}>
+                  <span className="text-dark">{item.name} </span>
+                </span>
+
+                <Badge variant="secondary" className="ml-2">
+                  {item.assignee_name}
+                </Badge>
+              </span>
             )}
             {!item.is_complete && (
               <span>
-                {item.name}{" "}
-                <Badge variant="secondary">{item.assignee_name}</Badge>
+                <span className={styles.Item}>{item.name} </span>
+                <Badge variant="secondary" className="ml-2">
+                  {item.assignee_name}
+                </Badge>
               </span>
             )}
           </div>
