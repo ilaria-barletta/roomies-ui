@@ -10,6 +10,7 @@ import {
   Alert,
 } from "react-bootstrap";
 import GroceryListItems from "./GroceryListItems";
+import GroceryListComments from "./GroceryListComments";
 
 const GroceryListDetails = ({ list, onListChanged }) => {
   const [showDeleteListPopup, setShowDeleteListPopup] = useState(false);
@@ -157,6 +158,10 @@ const GroceryListDetails = ({ list, onListChanged }) => {
           householdId={list.household}
           isListComplete={list.is_complete}
         />
+      </Container>
+
+      <Container className="mt-3">
+        <GroceryListComments listId={list.id} />
       </Container>
 
       {confirmDeleteListPopup}
