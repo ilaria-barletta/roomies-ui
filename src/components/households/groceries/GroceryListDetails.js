@@ -139,6 +139,10 @@ const GroceryListDetails = ({ list, onListChanged }) => {
           >
             New Item
           </Dropdown.Item>
+          <Dropdown.Header>Comments</Dropdown.Header>
+          <Dropdown.Item href={`/grocerylists/${list.id}/newcomment`}>
+            New Comment
+          </Dropdown.Item>
         </DropdownButton>
       </div>
       <h5>

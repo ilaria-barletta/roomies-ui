@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { axiosReq } from "../../../api/axiosDefaults";
 import { toast } from "react-toastify";
 import { Modal, Button, Container, Spinner } from "react-bootstrap";
+import { useCurrentUser } from "../../../contexts/CurrentUserContext";
 
 const GroceryListComments = ({ listId }) => {
+  const currentUser = useCurrentUser();
   const [comments, setComments] = useState();
   const [showDeleteItemPopup, setShowDeleteItemPopup] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -70,7 +72,12 @@ const GroceryListComments = ({ listId }) => {
   }
 
   if (!comments || !comments.length) {
-    return <p>There are no comments for the list yet.</p>;
+    return (
+      <div className="d-flex flex-column mt-4">
+        <h6 className="mb-3">Comments</h6>
+        <p>There are no comments for the list yet.</p>
+      </div>
+    );
   }
 
   return (
@@ -82,12 +89,14 @@ const GroceryListComments = ({ listId }) => {
             <div className="font-weight-bold mb-1">{comment.creator}</div>
             <div className="d-flex justify-content-between">
               {comment.content}
-              <Button
-                variant="danger"
-                onClick={() => onClickDeleteComment(comment)}
-              >
-                <i className="fas fa-trash-alt" />
-              </Button>
+              {comment.creator === currentUser?.username && (
+                <Button
+                  variant="danger"
+                  onClick={() => onClickDeleteComment(comment)}
+                >
+                  <i className="fas fa-trash-alt" />
+                </Button>
+              )}
             </div>
           </div>
         </div>
