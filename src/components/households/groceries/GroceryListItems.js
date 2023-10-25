@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { axiosReq } from "../../../api/axiosDefaults";
 import { toast } from "react-toastify";
-import {
-  Badge,
-  DropdownButton,
-  Dropdown,
-  Modal,
-  Button,
-  Container,
-  Spinner,
-} from "react-bootstrap";
+import Badge from "react-bootstrap/Badge";
+import Modal from "react-bootstrap/Modal";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Container from "react-bootstrap/Container";
+import Spinner from "react-bootstrap/Spinner";
+import Button from "react-bootstrap/Button";
 import GroceryItemFilterButton from "./GroceryItemFilterButton";
 import styles from "../../../styles/GroceryListItems.module.css";
 

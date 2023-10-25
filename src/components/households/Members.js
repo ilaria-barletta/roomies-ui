@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
-import {
-  Button,
-  Modal,
-  Container,
-  Spinner,
-  Dropdown,
-  DropdownButton,
-} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Modal from "react-bootstrap/Modal";
+import Container from "react-bootstrap/Container";
+import Spinner from "react-bootstrap/Spinner";
 import { toast } from "react-toastify";
 
 import Badge from "react-bootstrap/Badge";

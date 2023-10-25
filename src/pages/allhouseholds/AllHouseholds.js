@@ -5,7 +5,8 @@ import Card from "react-bootstrap/Card";
 import { toast } from "react-toastify";
 import Spinner from "react-bootstrap/Spinner";
 import Modal from "react-bootstrap/Modal";
-import { Button, Container } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 import HouseholdDetails from "../../components/households/HouseholdDetails";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 

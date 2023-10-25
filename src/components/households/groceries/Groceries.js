@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { axiosReq } from "../../../api/axiosDefaults";
-import { Button, Container, Spinner } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Spinner from "react-bootstrap/Spinner";
 import GroceryListDetails from "./GroceryListDetails";
 import { Link } from "react-router-dom";
 

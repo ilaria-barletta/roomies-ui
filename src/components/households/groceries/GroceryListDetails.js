@@ -1,14 +1,12 @@
 import { axiosReq } from "../../../api/axiosDefaults";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import {
-  DropdownButton,
-  Dropdown,
-  Container,
-  Modal,
-  Button,
-  Alert,
-} from "react-bootstrap";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Modal from "react-bootstrap/Modal";
+import Container from "react-bootstrap/Container";
+import Dropdown from "react-bootstrap/Dropdown";
+import Alert from "react-bootstrap/Alert";
+import Button from "react-bootstrap/Button";
 import GroceryListItems from "./GroceryListItems";
 import GroceryListComments from "./GroceryListComments";
 

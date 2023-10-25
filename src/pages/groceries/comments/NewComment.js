@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { Row, Col, Container, Form, Alert, Button } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
+import Alert from "react-bootstrap/Alert";
 import { toast } from "react-toastify";
 import { axiosReq } from "../../../api/axiosDefaults";
 

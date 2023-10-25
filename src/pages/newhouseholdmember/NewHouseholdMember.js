@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { Container, Spinner, Form, Button } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Spinner from "react-bootstrap/Spinner";
+import Container from "react-bootstrap/Container";
 import { toast } from "react-toastify";
 import { axiosReq } from "../../api/axiosDefaults";
 

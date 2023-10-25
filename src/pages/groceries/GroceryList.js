@@ -1,6 +1,8 @@
 import { axiosReq } from "../../api/axiosDefaults";
 import React, { useEffect, useState } from "react";
-import { Button, Container, Spinner } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Spinner from "react-bootstrap/Spinner";
 import { useParams, useHistory } from "react-router-dom";
 import GroceryListDetails from "../../components/households/groceries/GroceryListDetails";
 

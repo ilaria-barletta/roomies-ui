@@ -6,7 +6,7 @@ import {
   useCurrentUser,
   useSetCurrentUser,
 } from "../contexts/CurrentUserContext";
-import { NavDropdown } from "react-bootstrap";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import { axiosReq } from "../api/axiosDefaults";
 import { toast } from "react-toastify";
 

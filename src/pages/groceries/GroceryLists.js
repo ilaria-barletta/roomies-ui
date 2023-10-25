@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useParams, Link } from "react-router-dom";
-import { Container, Spinner, Card, Button, Modal } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import Spinner from "react-bootstrap/Spinner";
+import Container from "react-bootstrap/Container";
+import Modal from "react-bootstrap/Modal";
 
 const GroceryLists = () => {
   const { id: householdId } = useParams();

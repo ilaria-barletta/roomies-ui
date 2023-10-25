@@ -1,6 +1,8 @@
 import React from "react";
 import { useCurrentUser } from "../../../contexts/CurrentUserContext";
-import { DropdownButton, Dropdown, Badge } from "react-bootstrap";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Dropdown from "react-bootstrap/Dropdown";
+import Badge from "react-bootstrap/Badge";
 import { axiosReq } from "../../../api/axiosDefaults";
 import { toast } from "react-toastify";
 

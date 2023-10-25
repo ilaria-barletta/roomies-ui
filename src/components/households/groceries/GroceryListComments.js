@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { axiosReq } from "../../../api/axiosDefaults";
 import { toast } from "react-toastify";
-import {
-  Modal,
-  Button,
-  Container,
-  Spinner,
-  DropdownButton,
-  Dropdown,
-} from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Spinner from "react-bootstrap/Spinner";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 import { useCurrentUser } from "../../../contexts/CurrentUserContext";
 
 const GroceryListComments = ({ listId }) => {

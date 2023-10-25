@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import logo from "./logo.png";
 import styles from "../../styles/WelcomePage.module.css";
