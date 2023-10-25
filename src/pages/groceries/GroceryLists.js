@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
 import Modal from "react-bootstrap/Modal";
+import { toast } from "react-toastify";
 
 const GroceryLists = () => {
   const { id: householdId } = useParams();
@@ -26,9 +27,14 @@ const GroceryLists = () => {
   };
 
   const deleteList = async () => {
-    await axiosReq.delete(`/grocerylists/${listToDelete.id}/`);
-    setShowDeleteListPopup(false);
-    loadGroceryLists();
+    try {
+      await axiosReq.delete(`/grocerylists/${listToDelete.id}/`);
+      setShowDeleteListPopup(false);
+      loadGroceryLists();
+      toast.success("Successfully deleted grocery list.");
+    } catch {
+      toast.error("Failed to delete the grocery list. Please try again.");
+    }
   };
 
   // Get all grocery lists for the household
