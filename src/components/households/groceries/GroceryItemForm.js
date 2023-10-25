@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
+import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
@@ -13,6 +14,7 @@ import useHouseholdMembers from "../../../hooks/useHouseholdMembers";
 const GroceryItemForm = ({ listId, onItemAdded, existingItem }) => {
   const history = useHistory();
   const [householdId, setHouseholdId] = useState();
+  const [errors, setErrors] = useState({});
   const { isLoading: loading, members: availableMembers } =
     useHouseholdMembers(householdId);
   const [itemData, setItemData] = useState({
@@ -57,20 +59,22 @@ const GroceryItemForm = ({ listId, onItemAdded, existingItem }) => {
         await axiosReq.put(`/groceryitems/${existingItem.id}/`, itemData);
         toast.success("Successfully updated the grocery list item.");
         onItemAdded();
-      } catch {
+      } catch (err) {
         toast.error(
           "Failed to update the grocery list item. Please try again."
         );
+        setErrors(err.response?.data);
       }
     } else {
       try {
         await axiosReq.post("/groceryitems/", itemData);
         toast.success("Successfully created the grocery list item.");
         onItemAdded();
-      } catch {
+      } catch (err) {
         toast.error(
           "Failed to create the grocery list item. Please try again."
         );
+        setErrors(err.response?.data);
       }
     }
   };
@@ -106,6 +110,12 @@ const GroceryItemForm = ({ listId, onItemAdded, existingItem }) => {
                 onChange={handleChange}
               />
             </Form.Group>
+
+            {errors.name?.map((message, idx) => (
+              <Alert key={idx} variant="warning">
+                {message}
+              </Alert>
+            ))}
 
             <Form.Group controlId="exampleForm.SelectCustom">
               <Form.Label>Assigned member</Form.Label>
