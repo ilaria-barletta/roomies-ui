@@ -4,7 +4,7 @@ Roomies is a website addressed to people sharing an household. If you have roomm
 
 ![Roomies on multiple devices]()
 
-The live link to the project is here: 
+The live link to the project is here: https://roomiesui-16b4bb6864ed.herokuapp.com/
 ___
 
 # UX Design
@@ -26,23 +26,16 @@ Wireframes for the project were created using Figma and can be viewed on Figma [
 ![Wireframes 2]()
 ![Wireframes 3]()
 
-## Database Design 
-I designed the Database using LucidChard. A link to the document is []()
-
-![Database Diagram]()
-
 ## Agile 
 In this project I have used the agile method, a link to the Github project and stories can be found []().
 
 # Technologies Used
 * HTML5 
 * CSS 
-* Django
 * Bootstrap 5 
-* Python   
+* React   
 * FontAwesome 
 * Figma
-* Lucidchart
 
 ___
 # Testing 
