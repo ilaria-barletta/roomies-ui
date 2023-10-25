@@ -95,7 +95,7 @@ const GroceryLists = () => {
               </Link>
 
               <Button
-                name={`Delete grocery list ${list.name} button`}
+                aria-label={`Delete grocery list ${list.name} button`}
                 variant="danger"
                 onClick={() => onClickDeleteList(list)}
               >
@@ -117,7 +117,7 @@ const GroceryLists = () => {
               </Link>
 
               <Button
-                name={`Delete grocery list ${list.name} button`}
+                aria-label={`Delete grocery list ${list.name} button`}
                 variant="danger"
                 onClick={() => onClickDeleteList(list)}
               >

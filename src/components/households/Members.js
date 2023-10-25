@@ -99,7 +99,7 @@ const Members = ({ creator, isOwner, householdId }) => {
           </div>
           {isOwner && (
             <Button
-              name={`Delete member ${member.user_name} button`}
+              aria-label={`Delete member ${member.user_name} button`}
               variant="danger"
               onClick={() => clickDeleteMember(member)}
             >
