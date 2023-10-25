@@ -1,102 +1,45 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Roomies
 
-Welcome,
+Roomies is a website addressed to people sharing an household. If you have roommates and you need to take care of sharing rent and groceries, Roomies is for you. It is possible to create households, add members, keep track of the due rent and create grocery lists as well as assign items to specific housemates. They say sharing is hard, Roomies makes it easier.
 
-This is the Code Institute student template for React apps on the Codeanywhere IDE. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.  
-DO NOT use this template if you are using the Gitpod IDE. Use the following command instead:  
-`npx create-react-app . --template git+https://github.com/Code-Institute-Org/cra-template-moments.git --use-npm`
+![Roomies on multiple devices]()
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Codeanywhere and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **31st August, 2023**
+The live link to the project is here: 
+___
 
-## Codeanywhere Reminders
+# UX Design
 
-In Codeanywhere you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+ In Roomies my main goal was to build a useful and intuitive app that helps people to manage their household in a simple way. By using a series of buttons the user is allowed to perform actions like create households, add members to it, update rent payments, create grocery lists, add grocery items, assign the items to specific members and leave comments to the lists.The app is easy to navigate and to give a better experience to the user, it provides confirmation every time an action is performed letting the user  know if it's successfull or if an error occured.The user  will also receive details on how to fix such errors in order to proceed. The design picked here is minimal, the main image is a drawing of a household that I generated here : https://hotpot.ai/art-generator and that reflects the purpose of the app (a house shared by multiple people) making, in my opinion,  the scope of the app clear even before reading. 
+## Navigation 
 
-To log into the Heroku toolbelt CLI:
+### Navigation Bar 
+The navigation bar is minimal and for a non logged in user contains the name of the app and the sign in link that will take them to the form they need to fill in order to get access. Once the user is logged in the signed in link will also show the name of the user and will, if clicked, provide the option to sign out. To make it convenient for logged in users to get back to their main household when they are visiting different pages, for example if they are checking the grocery lists page, the `Roomies` site name link in the navigation bar will take them back to the page of their main household.
 
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
-3. Copy the key
-4. In Codeanywhere, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+### Navigating to and from forms 
+I have built this app so that all the main pages have a consistent structure regarding the style and the functionalities. This means that users will find it easy to use the various different parts of the app as they all look and behave in a consistent way. Household, grocery lists, grocery items and comments pages are all made of forms that the user needs to fill in order to create and update them. All pages have buttons that guide the user in their actions: `create`, `edit`, `delete`. Users are then able to either submit the form or go back to where they came from via a `back` button that is present on every from.  
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
 
----
+## Wireframes 
+Wireframes for the project were created using Figma and can be viewed on Figma []()
 
-Happy coding!
+![Wireframes 1]()
+![Wireframes 2]()
+![Wireframes 3]()
 
-# Getting Started with Create React App
+## Database Design 
+I designed the Database using LucidChard. A link to the document is []()
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Database Diagram]()
 
-## Available Scripts
+## Agile 
+In this project I have used the agile method, a link to the Github project and stories can be found []().
 
-In the project directory, you can run:
-
-### `npm install`
-
-Installs the required npm packages.
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open port 3000 to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Technologies Used
+* HTML5 
+* CSS 
+* Django
+* Bootstrap 5 
+* Python   
+* FontAwesome 
+* Figma
+* Lucidchart
