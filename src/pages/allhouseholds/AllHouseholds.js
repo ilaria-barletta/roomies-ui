@@ -150,6 +150,7 @@ const AllHouseholds = () => {
                 </Link>
                 <Button
                   variant="danger"
+                  name={`Delete household ${household.name} button`}
                   onClick={() => onShowDeletePopup(household)}
                 >
                   <i className="fas fa-trash-alt" />

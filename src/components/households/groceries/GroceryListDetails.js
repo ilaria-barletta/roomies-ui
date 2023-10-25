@@ -121,7 +121,7 @@ const GroceryListDetails = ({ list, onListChanged }) => {
         <h4>
           {list.name} {list.is_complete ? "(Completed)" : ""}
         </h4>
-        <DropdownButton id="manage-household-button" title="List Actions">
+        <DropdownButton id="manage-grocery-list-button" title="List Actions">
           <Dropdown.Item onClick={onClickChangeListStatus}>
             {list.is_complete ? "Mark as incomplete" : "Mark as complete"}
           </Dropdown.Item>

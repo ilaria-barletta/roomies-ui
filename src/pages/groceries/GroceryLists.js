@@ -94,7 +94,11 @@ const GroceryLists = () => {
                 <Button variant="secondary">Edit Name</Button>
               </Link>
 
-              <Button variant="danger" onClick={() => onClickDeleteList(list)}>
+              <Button
+                name={`Delete grocery list ${list.name} button`}
+                variant="danger"
+                onClick={() => onClickDeleteList(list)}
+              >
                 <i className="fas fa-trash-alt" />
               </Button>
             </Card.Body>
@@ -112,7 +116,11 @@ const GroceryLists = () => {
                 <Button variant="secondary">Edit Name</Button>
               </Link>
 
-              <Button variant="danger" onClick={() => onClickDeleteList(list)}>
+              <Button
+                name={`Delete grocery list ${list.name} button`}
+                variant="danger"
+                onClick={() => onClickDeleteList(list)}
+              >
                 <i className="fas fa-trash-alt" />
               </Button>
             </Card.Body>

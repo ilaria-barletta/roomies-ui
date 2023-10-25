@@ -83,7 +83,7 @@ const Members = ({ creator, isOwner, householdId }) => {
     <>
       <div className="d-flex justify-content-between mb-3">
         <h4>Members</h4>
-        <DropdownButton id="manage-household-button" title="Members Actions">
+        <DropdownButton id="manage-members-button" title="Members Actions">
           <Dropdown.Item href={`/households/${householdId}/newmember`}>
             Add a new member
           </Dropdown.Item>
@@ -98,7 +98,11 @@ const Members = ({ creator, isOwner, householdId }) => {
             {member.user_name} <Badge variant="secondary">Member</Badge>
           </div>
           {isOwner && (
-            <Button variant="danger" onClick={() => clickDeleteMember(member)}>
+            <Button
+              name={`Delete member ${member.user_name} button`}
+              variant="danger"
+              onClick={() => clickDeleteMember(member)}
+            >
               <i className="fas fa-trash-alt" />
             </Button>
           )}

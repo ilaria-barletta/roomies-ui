@@ -91,7 +91,7 @@ const Rent = ({ household, householdChanged }) => {
     <>
       <div className="d-flex justify-content-between">
         <h4>Rent</h4>
-        <DropdownButton id="manage-household-button" title="Rent Actions">
+        <DropdownButton id="manage-rent-button" title="Rent Actions">
           {isOwner && (
             <>
               <Dropdown.Item
