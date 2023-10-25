@@ -84,7 +84,10 @@ const NewHouseholdMember = () => {
         <div>
           <h3>{availableMembers?.length} results</h3>
           {availableMembers?.map((member) => (
-            <div className="d-flex justify-content-between mb-3">
+            <div
+              key={member.id}
+              className="d-flex justify-content-between mb-3"
+            >
               {member.username}
               <Button
                 variant="secondary"

@@ -93,7 +93,10 @@ const Members = ({ creator, isOwner, householdId }) => {
         {creator} <Badge variant="primary">Creator</Badge>
       </div>
       {members.map((member) => (
-        <div className="d-flex justify-content-between mb-1">
+        <div
+          className="d-flex justify-content-between mb-1"
+          key={member.user_name}
+        >
           <div>
             {member.user_name} <Badge variant="secondary">Member</Badge>
           </div>

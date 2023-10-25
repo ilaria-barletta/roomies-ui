@@ -133,7 +133,7 @@ const AllHouseholds = () => {
         </Link>
       </div>
       {households.map((household) => (
-        <Card className="mb-3">
+        <Card key={household.id} className="mb-3">
           <Card.Body>
             <Card.Title>{household.name}</Card.Title>
             <Button

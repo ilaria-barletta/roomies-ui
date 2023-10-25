@@ -124,7 +124,7 @@ const Rent = ({ household, householdChanged }) => {
       <div>
         <h5 className="mb-1">Members Rent Status</h5>
         {household.members.map((member) => (
-          <div>
+          <div key={member.user_name}>
             {member.user_name}{" "}
             {member.has_paid_rent ? (
               <Badge variant="success">Paid</Badge>

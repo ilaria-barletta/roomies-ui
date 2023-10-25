@@ -117,7 +117,9 @@ const GroceryItemForm = ({ listId, onItemAdded, existingItem }) => {
                 name="assignee"
               >
                 {availableMembers?.map((member) => (
-                  <option value={member.user}>{member.user_name}</option>
+                  <option key={member.user_name} value={member.user}>
+                    {member.user_name}
+                  </option>
                 ))}
                 <option value="">Select</option>
               </Form.Control>

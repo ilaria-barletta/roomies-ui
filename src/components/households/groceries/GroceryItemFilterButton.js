@@ -47,6 +47,7 @@ const GroceryItemFilterButton = ({
                   onChange={onAssigneeChange}
                   checked={assignee === member.user.toString()}
                   type="radio"
+                  key={member.user_name}
                 />
               );
             })}

@@ -164,7 +164,7 @@ const GroceryListItems = ({ listId, householdId, isListComplete }) => {
     <div className="d-flex flex-column mt-4">
       {heading}
       {items.map((item) => (
-        <div className="d-flex justify-content-between mb-2">
+        <div key={item.id} className="d-flex justify-content-between mb-2">
           <div>
             {item.is_complete && (
               <span>

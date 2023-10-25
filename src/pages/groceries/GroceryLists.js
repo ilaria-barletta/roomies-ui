@@ -84,7 +84,7 @@ const GroceryLists = () => {
           </Link>
         </div>
         {incompleteLists().map((list) => (
-          <Card className="mb-3">
+          <Card className="mb-3" key={list.name}>
             <Card.Body>
               <Card.Title>{list.name}</Card.Title>
               <Link to={`/grocerylists/${list.id}`} className="mr-1">
@@ -106,7 +106,7 @@ const GroceryLists = () => {
         ))}
         {completeLists().length > 0 && <h4 className="mb-1">Completed</h4>}
         {completeLists().map((list) => (
-          <Card className="mb-3">
+          <Card className="mb-3" key={list.name}>
             <Card.Body>
               <Card.Title>{list.name}</Card.Title>
               <Link to={`/grocerylists/${list.id}`} className="mr-1">

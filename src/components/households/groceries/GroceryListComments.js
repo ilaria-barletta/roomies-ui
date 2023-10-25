@@ -89,7 +89,7 @@ const GroceryListComments = ({ listId }) => {
     <div className="d-flex flex-column mt-4">
       <h6 className="mb-3">Comments</h6>
       {comments.map((comment) => (
-        <div className="mb-2">
+        <div key={comment.id} className="mb-2">
           <div>
             <div className="font-weight-bold mb-1">{comment.creator}</div>
             <div className="d-flex justify-content-between">
