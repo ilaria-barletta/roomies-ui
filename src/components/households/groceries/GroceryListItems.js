@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { axiosReq } from "../../../api/axiosDefaults";
 import { toast } from "react-toastify";
 import Badge from "react-bootstrap/Badge";
@@ -30,7 +30,7 @@ const GroceryListItems = ({ listId, householdId, isListComplete }) => {
     setShowItemStatusPopup(false);
   };
 
-  const loadItems = async () => {
+  const loadItems = useCallback(async () => {
     setIsLoading(true);
     const { assignee, is_complete } = filters;
     const { data } = await axiosReq.get(
@@ -39,11 +39,11 @@ const GroceryListItems = ({ listId, householdId, isListComplete }) => {
     );
     setItems(data);
     setIsLoading(false);
-  };
+  }, [filters, listId]);
 
   useEffect(() => {
     loadItems();
-  }, [filters]);
+  }, [loadItems]);
 
   const deleteItem = async () => {
     try {
