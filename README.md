@@ -461,6 +461,18 @@ The second screenshot is of me manually running ESLint in the terminal. To do th
 
 **Fix** : The cause of this issue was that I was storing the member to delete to show in a confirmation modal. However, I didn't always reset it properly when cancelling from the modal or when clicking around. The fix here was to make sure I always reset the member to delete to `null` when the modal closed. 
 
+`4`
+
+**Expected** : The user should remain logged out after clicking logout and then refreshing the page
+
+
+**Testing** : I tested this by logging out from the navigation bar and then refreshing the browser. 
+
+
+**Result** : Refreshing the page loads the previously logged in user again.  
+
+**Fix** : I have implemented the dj-rest-auth logout fix as detailed in the Code Institute instructions. This issue still persisted for me afterwards, but the issue was that I forgot a trailing `/` on the API route config. The fix here was to add the slash.
+
 ### Unfixed bugs 
 `1`
 
@@ -474,17 +486,6 @@ The second screenshot is of me manually running ESLint in the terminal. To do th
 
 **Other details** : I have not fixed this bug yet as it only allows the user read access to **some** data. The user is not able to delete/modify the data as per the project requirements. 
 
-`2`
-
-**Expected** : The user should remain logged out after clicking logout and then refreshing the page
-
-
-**Testing** : I tested this by logging out from the navigation bar and then refreshing the browser. 
-
-
-**Result** : Refreshing the page loads the previously logged in user again.  
-
-**Other details** : I have implemented the dj-rest-auth logout fix as detailed in the Code Institute instructions, but this issue has still persisted for me and I haven't been able to fix it. 
 
 # Components 
 I have created several reusable components for this project. Below are some examples and their uses. 
