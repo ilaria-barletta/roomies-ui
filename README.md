@@ -5,11 +5,22 @@ Roomies is a website addressed to people sharing an household. If you have roomm
 ![Roomies on multiple devices](readme-images/responsive-example.png)
 
 The live link to UI is here: https://roomiesui-16b4bb6864ed.herokuapp.com/
+
 The live link to the API is here: https://roomiesapi-637170cefd22.herokuapp.com/
 
 The API repository is here: https://github.com/ilaria-barletta/roomies-api
 
 ___
+
+# Project Goals 
+* Allow users to register/login to the Roomies app.
+* Allow users to create a `Household` which is the primary model which connects all the functionality of the app. Households are intended to allow users to model their actual household and perform all the actions (such as managing groceries and rent) that make their life easier. 
+* Allow users to add/remove other users to their `Household`
+* Allow users to create `Grocery Lists` for their `Household`
+* Allow users to add `Grocery Items` to their `Grocery Lists`
+* Allow users to add `Comments` to their `Grocery Lists`
+* Provide CRUD functionality for all of the relevant models. 
+
 
 # Features 
 
@@ -117,6 +128,13 @@ I have also created several Github Milestones to track the Epics for the applica
 * React   
 * FontAwesome 
 * Figma
+
+## Toast notifications 
+I have also used [react toastify](https://www.npmjs.com/package/react-toastify) to handle the toast notifications shown to the user after the perform actions in the app. I considered several different libraries for this purpose, and read several articles comparing them. In the end I chose this library because: 
+
+1. It is easy to install. After installing the dependency using `npm`, I had just to add a couple of imports and one component usage to my main [App](src/App.js) component. 
+2. It is easy to use. This library provides a function which I can import from anywhere in the application and call to show a toast notification. 
+3. It is nicely styled and provides different configurations. I didn't have to worry about creating different success/warning/error styling options as they came with `react-toastify` already. 
 
 ___
 # Testing 
