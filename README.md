@@ -395,6 +395,33 @@ Username, Password, Confirm password    | Pass        |
 |   Updated comment : comment successfully updated pop-up message shows when user action is successful     | Pass        |
 |   Deleted comment : comment successfully deleted pop-up message shows when user action is successful   | Pass        |
 
+## Validators 
+
+### Lighthouse 
+
+#### Desktop Result 
+![Lighthouse Desktop](readme-images/lighthouse-desktop.png)
+
+#### Mobile Result 
+![Lighthouse Mobile](readme-images/lighthouse-mobile.png)
+
+### HTML
+[html](https://validator.w3.org/#validate_by_input) testing: I have tested html and the validator returned no errors: 
+![html validator returning no errors](readme-images/html-validator.png)
+
+### CSS
+[css](https://jigsaw.w3.org/css-validator/) testing: I have tested css and the validator returned no errors:
+ ![css validator returning no errors](readme-images/css-validator.png)
+
+### Javascript 
+To test the Javascript for the app I have used [ESLint](https://eslint.org/)
+
+Below are two screenshots. One of the app compiling successfully when running the server (and showing no linting issues). 
+The second screenshot is of me manually running ESLint in the terminal. To do this I added a command to the `package.json` file to allow me to run ESLint (I found this solution on StackOverflow). 
+
+![Eslint returning no errors](readme-images/eslint1.png)
+![Eslint returning no errors 2](readme-images/eslint2.png)
+
 ## Bugs 
 
 ### Fixed Bugs 
