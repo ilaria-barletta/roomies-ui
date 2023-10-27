@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -20,14 +20,14 @@ const EditComment = () => {
 
   const history = useHistory();
 
-  const loadComment = async () => {
+  const loadComment = useCallback(async () => {
     const { data } = await axiosReq.get(`/grocerylistcomments/${commentId}/`);
     setCommentData(data);
-  };
+  }, [commentId]);
 
   useEffect(() => {
     loadComment();
-  }, []);
+  }, [loadComment]);
 
   const goBack = () => {
     // Found here: https://v5.reactrouter.com/web/api/history

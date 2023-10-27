@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -22,14 +22,14 @@ const EditHouseholdForm = () => {
 
   const history = useHistory();
 
-  const loadHousehold = async () => {
+  const loadHousehold = useCallback(async () => {
     const { data } = await axiosReq.get(`/households/${id}/`);
     setHouseholdData(data);
-  };
+  }, [id]);
 
   useEffect(() => {
     loadHousehold();
-  }, []);
+  }, [loadHousehold]);
 
   const handleChange = (event) => {
     setHouseholdData({

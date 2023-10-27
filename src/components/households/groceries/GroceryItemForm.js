@@ -1,5 +1,5 @@
 import { axiosReq } from "../../../api/axiosDefaults";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -34,10 +34,10 @@ const GroceryItemForm = ({ listId, onItemAdded, existingItem }) => {
     });
   };
 
-  const loadList = async () => {
+  const loadList = useCallback(async () => {
     const { data } = await axiosReq.get(`/grocerylists/${listId}/`);
     setHouseholdId(data.household);
-  };
+  }, [listId]);
 
   const goBack = () => {
     // Found here: https://v5.reactrouter.com/web/api/history
@@ -46,7 +46,7 @@ const GroceryItemForm = ({ listId, onItemAdded, existingItem }) => {
 
   useEffect(() => {
     loadList();
-  }, []);
+  }, [loadList]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

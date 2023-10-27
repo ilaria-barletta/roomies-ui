@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useParams, Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -38,17 +38,17 @@ const GroceryLists = () => {
   };
 
   // Get all grocery lists for the household
-  const loadGroceryLists = async () => {
+  const loadGroceryLists = useCallback(async () => {
     const { data } = await axiosReq.get(
       `/grocerylists/?household=${householdId}`
     );
     setLists(data);
     setIsLoading(false);
-  };
+  }, [householdId]);
 
   useEffect(() => {
     loadGroceryLists();
-  }, []);
+  }, [loadGroceryLists]);
 
   const incompleteLists = () => lists?.filter((l) => !l.is_complete);
   const completeLists = () => lists?.filter((l) => l.is_complete);

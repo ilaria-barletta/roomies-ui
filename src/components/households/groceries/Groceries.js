@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { axiosReq } from "../../../api/axiosDefaults";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -11,18 +11,18 @@ const Groceries = ({ householdId }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   // Get grocery lists for the household that aren't complete
-  const loadGroceryLists = async () => {
+  const loadGroceryLists = useCallback(async () => {
     setIsLoading(true);
     const { data } = await axiosReq.get(
       `/grocerylists/?household=${householdId}&is_complete=false`
     );
     setLists(data);
     setIsLoading(false);
-  };
+  }, [householdId]);
 
   useEffect(() => {
     loadGroceryLists();
-  }, []);
+  }, [loadGroceryLists]);
 
   const onListChanged = () => {
     loadGroceryLists();

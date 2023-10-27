@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { axiosReq } from "../../api/axiosDefaults";
 import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -16,15 +16,15 @@ const Members = ({ creator, isOwner, householdId }) => {
   const [memberToDelete, setMemberToDelete] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const loadMembers = async () => {
+  const loadMembers = useCallback(async () => {
     const { data } = await axiosReq.get(`/households/${householdId}/members`);
     setMembers(data);
     setIsLoading(false);
-  };
+  }, [householdId]);
 
   useEffect(() => {
     loadMembers();
-  }, []);
+  }, [loadMembers]);
 
   const onCloseDeletePopup = () => {
     setShowDeletePopup(false);

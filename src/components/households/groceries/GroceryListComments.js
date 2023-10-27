@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { axiosReq } from "../../../api/axiosDefaults";
 import { toast } from "react-toastify";
 import Modal from "react-bootstrap/Modal";
@@ -21,16 +21,16 @@ const GroceryListComments = ({ listId }) => {
     setShowDeleteItemPopup(false);
   };
 
-  const loadComments = async () => {
+  const loadComments = useCallback(async () => {
     setIsLoading(true);
     const { data } = await axiosReq.get(`/grocerylistcomments/?list=${listId}`);
     setComments(data);
     setIsLoading(false);
-  };
+  }, [listId]);
 
   useEffect(() => {
     loadComments();
-  }, []);
+  }, [loadComments]);
 
   const deleteComment = async () => {
     try {

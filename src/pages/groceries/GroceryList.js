@@ -1,5 +1,5 @@
 import { axiosReq } from "../../api/axiosDefaults";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
@@ -12,11 +12,11 @@ const GroceryList = () => {
   const { id } = useParams();
   const history = useHistory();
 
-  const loadList = async () => {
+  const loadList = useCallback(async () => {
     const { data } = await axiosReq.get(`/grocerylists/${id}/`);
     setList(data);
     setIsLoading(false);
-  };
+  }, [id]);
 
   const goBack = () => {
     history.push(`/households/${list.household}/groceries`);
@@ -24,7 +24,7 @@ const GroceryList = () => {
 
   useEffect(() => {
     loadList();
-  }, [id]);
+  }, [loadList]);
 
   if (isLoading) {
     return (
