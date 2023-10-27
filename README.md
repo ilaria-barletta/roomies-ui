@@ -416,6 +416,35 @@ Username, Password, Confirm password    | Pass        |
 
 **Fix** : The cause of this issue was that I was storing the member to delete to show in a confirmation modal. However, I didn't always reset it properly when cancelling from the modal or when clicking around. The fix here was to make sure I always reset the member to delete to `null` when the modal closed. 
 
+# Components 
+I have created several reusable components for this project. Below are some examples and their uses. 
+
+## HouseholdDetails 
+The [HouseholdDetails](src/components/households/HouseholdDetails.js) component is responsible for rendering all of the details related to a household. It renders a heading for the household and an Accordion with all the important details (rent, members, groceries) that also reuse other components. `HouseholdDetails` also allows performing actions such as edit or delete on a household. 
+
+I created this component because there are two different places that household details need to be displayed in the application: 
+
+1. From the [home](src/pages/home/HomePage.js) page where the primary use is to show the household details to the user when they log in. 
+2. From the [all households](src/pages/allhouseholds/AllHouseholds.js) list page, where users can see a list of all their households and click on one to see the details of it.
+
+## GroceryListDetails 
+Similar to `HouseholdDetails`, I have also created a [GroceryListDetails](src/components/households/groceries/GroceryListDetails.js) component which is responsible for showing all of the details related to a grocery list as well as handling the logic for performing actions on a grocery list. 
+
+I created this component because there are two different places that grocery list details can be shown: 
+
+1. From the [accordion](src/components/households/groceries/Groceries.js) that is shown when viewing household details. 
+2. From the [dedicated page](src/pages/groceries/GroceryList.js) for viewing grocery lists which users can access from the `All Grocery Lists` page and navigating to a particular list. 
+
+## Other Examples of components 
+There are several other places where I have created components, either for reuse in multiple places or to split bigger components up into smaller pieces which are easier to manage. These can be seen in the [components directory](src/components) of the project.
+
+### Household details accordion components 
+Each section of the household details accordion has a decicated component: [Rent](src/components/households/rent/Rent.js), [Groceries](src/components/households/groceries/Groceries.js) and [Members](src/components/households/Members.js)
+![Accordion components](readme-images/accordion-components.png)
+
+### Navbar
+The navigation bar is also its own component and it handles linking back to the home page as well as showing the currently logged in user (if available). The navigation bar is used on every page of the application. 
+
 # Deployment, Forking and Cloning 
 
 ## Deployment
