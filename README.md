@@ -53,7 +53,7 @@ The household members are visible from the homepage but by clicking on the `memb
 
 ## Household Rent 
 
-The rent section shows the total rent amount and the amount due by the logged in user. It also shows the status of the payment for the other members. If rent is due, a `due` sign will show beside the name of the user that has yet to pay it. The rent actions button let the user `pay rent`(so that they confirm they have paid their share), and if the user logged in is the creator of the household they will also have the option to `mark rent as due` (in order to restart the payments when the next cycle stars) and `mark rent as complete` (when everyone has paid for that cycle).
+The rent section shows the total rent amount and the amount due by the logged in user. It also shows the status of the payment for the other members. If rent is due, a `due` sign will show beside the name of the user that has yet to pay it. The rent actions button let the user `pay rent` (so that they confirm they have paid their share), and if the user logged in is the creator of the household they will also have the option to `mark rent as due` (in order to restart the payments when the next cycle stars) and `mark rent as complete` (when everyone has paid for that cycle).
 
 ![Rent section](readme-images/rent.png)
 ## Grocery Lists 
