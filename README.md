@@ -474,6 +474,18 @@ The second screenshot is of me manually running ESLint in the terminal. To do th
 
 **Other details** : I have not fixed this bug yet as it only allows the user read access to **some** data. The user is not able to delete/modify the data as per the project requirements. 
 
+`2`
+
+**Expected** : The user should remain logged out after clicking logout and then refreshing the page
+
+
+**Testing** : I tested this by logging out from the navigation bar and then refreshing the browser. 
+
+
+**Result** : Refreshing the page loads the previously logged in user again.  
+
+**Other details** : I have implemented the dj-rest-auth logout fix as detailed in the Code Institute instructions, but this issue has still persisted for me and I haven't been able to fix it. 
+
 # Components 
 I have created several reusable components for this project. Below are some examples and their uses. 
 
