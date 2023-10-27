@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -33,14 +33,14 @@ const EditGroceryList = () => {
     });
   };
 
-  const loadGroceryList = async () => {
+  const loadGroceryList = useCallback(async () => {
     const { data } = await axiosReq.get(`/grocerylists/${id}/`);
     setGroceryListData(data);
-  };
+  }, [id]);
 
   useEffect(() => {
     loadGroceryList();
-  }, []);
+  }, [loadGroceryList]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
