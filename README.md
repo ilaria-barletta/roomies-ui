@@ -433,3 +433,10 @@ To clone this repository:
 1. Click the "Code" button in the repository. 
 2. Copy the clone link.
 3. Use git to clone the copied link: `git clone LINK`. 
+# References & Credits
+* The welcome page image has been generated using https://hotpot.ai/art-generator. 
+* All the icons have been taken form [Font Awesome](https://fontawesome.com/).
+* Very helpful in solving issues encounterd during development has been stack overflow. I have left precise comments in the code specifying where some lines come from or have been adapted from to address my needs. 
+* The React [Bootstrap](https://react-bootstrap-v4.netlify.app/) and [React](https://react.dev/learn) documentations have been extremely helpful in developing Roomies
+* The readme structure has been taken from code institute material.
+* I used the Moments Code Institute project as the reference for some of the parts of the project. In particular, the authentication was something I learned from following along with that project. 
