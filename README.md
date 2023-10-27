@@ -93,9 +93,8 @@ I have also provided detailed error information on forms so users know why their
 ## Wireframes 
 Wireframes for the project were created using Figma and can be viewed on Figma []()
 
-![Wireframes 1]()
-![Wireframes 2]()
-![Wireframes 3]()
+![Wireframes 1](readme-images/wireframes-1.png)
+![Wireframes 2](readme-images/wireframes-2.png)
 
 ## Agile 
 
