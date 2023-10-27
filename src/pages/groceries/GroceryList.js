@@ -4,18 +4,27 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
 import { useParams, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 import GroceryListDetails from "../../components/households/groceries/GroceryListDetails";
 
 const GroceryList = () => {
   const [list, setList] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [hasFailed, setHasFailed] = useState(false);
   const { id } = useParams();
   const history = useHistory();
 
   const loadList = useCallback(async () => {
-    const { data } = await axiosReq.get(`/grocerylists/${id}/`);
-    setList(data);
-    setIsLoading(false);
+    try {
+      const { data } = await axiosReq.get(`/grocerylists/${id}/`);
+      setList(data);
+      setIsLoading(false);
+    } catch (err) {
+      toast.error(
+        `Failed to load the grocery list. Reason: ${err.response?.data?.detail}`
+      );
+      setHasFailed(true);
+    }
   }, [id]);
 
   const goBack = () => {
@@ -25,6 +34,14 @@ const GroceryList = () => {
   useEffect(() => {
     loadList();
   }, [loadList]);
+
+  if (hasFailed) {
+    return (
+      <Container className="d-flex justify-content-center">
+        Something went wrong trying to load this grocery list...
+      </Container>
+    );
+  }
 
   if (isLoading) {
     return (
