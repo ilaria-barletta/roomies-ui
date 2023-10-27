@@ -16,7 +16,19 @@ ___
 The navigation bar is minimal and for a non logged in user contains the name of the app and the sign in link that will take them to the form they need to fill in order to get access. Once the user is logged in the signed in link will also show the name of the user and will, if clicked, provide the option to sign out. To make it convenient for logged in users to get back to their main household when they are visiting different pages, for example if they are checking the grocery lists page, the `Roomies` site name link in the navigation bar will take them back to the page of their main household.
 
 ### Navigating to and from forms 
-I have built this app so that all the main pages have a consistent structure regarding the style and the functionalities. This means that users will find it easy to use the various different parts of the app as they all look and behave in a consistent way. Household, grocery lists, grocery items and comments pages are all made of forms that the user needs to fill in order to create and update them. All pages have buttons that guide the user in their actions: `create`, `edit`, `delete`. Users are then able to either submit the form or go back to where they came from via a `back` button that is present on every from.  
+I have built this app so that all the main pages have a consistent structure regarding the style and the functionalities. This means that users will find it easy to use the various different parts of the app as they all look and behave in a consistent way. Household, grocery lists, grocery items and comments pages are all made of forms that the user needs to fill in order to create and update them. Users are able to navigate to the relevant form from the model page to either create or edit and then users are able to either submit the form or go back to where they came from via a consistent `back` button that is present on every from. This means that once users have used a single form in the app, they will be used to the structure for all of the others. 
+
+### Model Actions 
+In order to perform different CRUD operations on the different models available throughout the app, I have opted for a Dropdown Button approach which is present in all the places where I show model details (household, groceries, members, rent, etc). The dropdowns all follow a similar pattern and allow users to perform important actions on the relevant model. I have decided on this approach as it allows me to group actions together on the page and means that users will always know where to look to perform actions across the different sections in the app. 
+
+### User Feedback
+I have added a few features to ensure that users are always aware of what is happening in the application. 
+
+#### Toast Notifications 
+The first of these features is the use of toast notifications for all user actions. Whenever a user performs an action that uses the API a toast notification is always shown after the API responds which lets the user know that the action has finished. The toast messages shown are styled depending on if the action was successful or not and disappear after a few seconds. 
+
+#### Form Errors 
+I have also provided detailed error information on forms so users know why their action failed (and not just that it did which the Toast notification will inform them of). All forms in the app have error messages for their fields which will show information underneath the field detailing if something was wrong with the user input. An example would be omitting a required field - this information would then be displayed in an alert under the field so the user knows they need to fill it in. 
 
 
 ## Wireframes 
