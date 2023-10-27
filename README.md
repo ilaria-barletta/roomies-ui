@@ -9,22 +9,58 @@ ___
 
 # Features 
 
-## Welcome Page 
+## Welcome Page :
+
+This is the welcome page page that the user sees before registering or logging in. 
+The content is centered and the style is clean and simple.The image makes the scope of roomies clear 
+and the additional concise text explains quickly what roomies is for. 
+There is a navigation bar that at this stage contains only the name of the website and a link to the sign in form. 
+The navigation bar will change slighly and show the name of the signed in user once they are logged in.
+There are then 2 buttons that let the user sign up if they are new or sign in if they are known users. 
+
+![Welcome page and option to sign in and sign up](readme-images/welcome-page.png)
 
 ## Home Page (Household Details)
+ The homepage is represented by the main household a user has registered on the platform. The name of the household is displayed on the top of the page so that the user can esily identify it (this is useful if for example the user has more than 1 household i.e. they manage more than one property).The page shows multiple sections: "members", "rent", "groceries". Initially only the member area is expanded to give a clear overview of who the members are and who the creator of the household is but the other sections can be expanded too by clicking on them and will provide more details regarding rent and groceries. The household actions button and the members actions button both present in the homepage will let the user create a new household or edit/ delete the one they are looking at as well as add members to the household.  
+
+![Home page showing household details](readme-images/homepage-household-details.png)
 
 ## All Households 
 
+This page contains a list of all the household for the signed in user. The user has the option here to create a new household and by clicking on the `new household` button they will be taken to the relevant form, as well as see the list of all the households they have registered on the platform. In the list it is possible to identify the household by its name and each household has 3 buttons that will take the user to view details, edit  and delete the household 
+
+![All households page showing a list of all the households for the logged in user](readme-images/all-households.png)
+
 ## Household Members
+The household members are visible from the homepage but by clicking on the `members actions` button, the creator will be offered the opportunity to add members. When adding members the user will be able to search for the username by inputting the name of part of it in the searching bar. When hitting `search` they will be shown a list of all the registered user with the selected username and they will be able to add them to the household via the `add` button.In order to delete members, the user can simply click on the delete button from the homepage and after confirming their action they will see the refreshed list no longer showing the member just deleted.  
+
+![Searching bar to search for and add members to the household](readme-images/searching-members-add.png)
 
 ## Household Rent 
 
-## Grocery Lists 
+The rent section shows the total rent amount and the amount due by the logged in user. It also shows the status of the payment for the other members. If rent is due, a `due` sign will show beside the name of the user that has yet to pay it. The rent actions button let the user `pay rent`(so that they confirm they have paid their share), and if the user logged in is the creator of the household they will also have the option to `mark rent as due` (in order to restart the payments when the next cycle stars) and `mark rent as complete` (when everyone has paid for that cycle).
 
+![Rent section](readme-images/rent.png)
+## Grocery Lists 
+The grocery lists page shows a list of all the grocery lists for the household. The way this page has been built is consistent with the way the all household page was built so the user will have no issues in navigating it.  The `new grocery list` button will take the user to the relevant form in order to create a new list. Once the list is created then new items can be added to it. From this page the user has the option to view the list, edit the nane of the same or delete it. Lists can be either completed or incomplete. The completed list will all show at the bottom of the page. 
+
+![Grocery lists](readme-images/grocery-lists.png)
 ### Grocery List Details 
 
+Each grocery list has a name and shows the creation date and the name of the user that created it. The font picked for the list itself reminds of handwriting so will make it easier for the user to identify the items in the list from the rest of the text. From the `list actions` button the user is able to edit, delete and mark the list as complete (only the creator of the list is allowed to do so), as well as add new items and add comments. 
+
+![Grocery list detail](readme-images/grocery-list-detail.png)
+![Grocery list actions](readme-images/grocery-list-actions.png)
 #### Items 
+
+Items can be added using the `list actions` button but they can then be managed using the `item actions` button present beside each item. The available actions are mark as complete, edit and delete. The edit option will let the user change or pick an assignee (the person that, in the household, is in charge for that item). There is as well an option to filter items by assignee and or status. By clicking on the filter icon, the user will be taken to the filters selection. In this way they will be able to filter all the items they are to get or all the items another member of the household is in charge of. 
+
+![Grocery items](readme-images/grocery-items.png)
+![Grocery list filters](readme-images/grocery-list-filters.png)
 #### Comments  
+Comments can be left by the user in every grocery list to communicate with the other members. Comments can be seen by all members but managed only by the user that left them in the first place. The `manage` button will be visible only beside comments left by the logged in user. The manage button will let the user either edit their own comment or delete it. 
+![comments in grocery lists](readme-images/comments.png)
+![comments manage button](readme-images/comment-manage-button.png)
 
 
 # UX Design
