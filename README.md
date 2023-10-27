@@ -81,6 +81,14 @@ Comments can be left by the user in every grocery list to communicate with the o
 # UX Design
 
  In Roomies my main goal was to build a useful and intuitive app that helps people to manage their household in a simple way. By using a series of buttons the user is allowed to perform actions like create households, add members to it, update rent payments, create grocery lists, add grocery items, assign the items to specific members and leave comments to the lists.The app is easy to navigate and to give a better experience to the user, it provides confirmation every time an action is performed letting the user  know if it's successfull or if an error occured.The user  will also receive details on how to fix such errors in order to proceed. The design picked here is minimal, the main image is a drawing of a household that I generated here : https://hotpot.ai/art-generator and that reflects the purpose of the app (a house shared by multiple people) making, in my opinion,  the scope of the app clear even before reading. 
+
+## Fonts 
+I have chosen a custom font for the grocery list items which looks like handwriting. This choice was made so users would be reminded of a physical grocery list and it makes the application more user friendly and inviting. A screenshot can be seen below in the Features section of this document. 
+
+## Colors 
+I have used colors for actions throughout the app that are consistent with their result. For example: delete buttons and confirmations throughout the application are `red` so the user knows the action will be irreversible. 
+Successful actions have a `green` color in the toast notifications I've used. I have also used `blue` for the action buttons throughout the app. 
+
 ## Navigation 
 
 ### Navigation Bar 
