@@ -4,7 +4,8 @@ Roomies is a website addressed to people sharing an household. If you have roomm
 
 ![Roomies on multiple devices](readme-images/responsive-example.png)
 
-The live link to the project is here: https://roomiesui-16b4bb6864ed.herokuapp.com/
+The live link to UI is here: https://roomiesui-16b4bb6864ed.herokuapp.com/
+The live link to the API is here: https://roomiesapi-637170cefd22.herokuapp.com/
 
 The API repository is here: https://github.com/ilaria-barletta/roomies-api
 
