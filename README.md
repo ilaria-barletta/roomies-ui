@@ -62,7 +62,14 @@ Wireframes for the project were created using Figma and can be viewed on Figma [
 ![Wireframes 3]()
 
 ## Agile 
-In this project I have used the agile method, a link to the Github project and stories can be found []().
+
+### Stories
+In this project I have used the agile method, a link to the Github project and stories can be found [here](https://github.com/users/ilaria-barletta/projects/3).
+
+### Epics
+I have also created several Github Milestones to track the Epics for the application and they can be viewed [here](https://github.com/ilaria-barletta/roomies-api/milestones?with_issues=no). A screenshot of the epics is also shown below. 
+
+![Epics](readme-images/epics.png)
 
 # Technologies Used
 * HTML5 
@@ -330,3 +337,42 @@ Username, Password, Confirm password    | Pass        |
 |    Created comment : comment successfully created pop-up message shows when user action is successful    | Pass        |
 |   Updated comment : comment successfully updated pop-up message shows when user action is successful     | Pass        |
 |   Deleted comment : comment successfully deleted pop-up message shows when user action is successful   | Pass        |
+
+## Bugs 
+
+### Fixed Bugs 
+`1`
+
+**Expected** : When a user filters grocery list items by assignee, the assignee should be shown as selected in the radio options in the form.
+
+
+**Testing** : I tested this by applying a filter to a grocery list items list, by selecting a particular user to filter by. I then applied the filter, closed the modal, and reopened again to change the filter.
+
+
+**Result** : When reopening the filter list the previously selected filter was not displayed. 
+
+**Fix** : The cause of this issue was the code to check if a radio option should be selected. It was comparing the filter to a user id. I used strict equals to check (`===`) but it turned out that the types of the two variables were different. In this case one was a string and one was an integer. I fixed this bug by converting both to strings using `toString`
+
+`2`
+
+**Expected** : The user should be redirected to the sign in screen if their login has expired after not using the app for a while. 
+
+
+**Testing** : I tested this by leaving the application open for a little while and letting my login expire on various different pages in the app. 
+
+
+**Result** : On resuming use of the app pages wouldn't load correctly and loading icons would remain on the page indefinitely.
+
+**Fix** : The cause of this issue was that I had not correctly set up the Axios code which handled intercepting errors and performing redirects. The fix here was to apply a redirect in the user context code which sent users back to the sign in page. 
+
+`3`
+
+**Expected** : The user should be able to delete a household member clicking on the delete button beside their name.  
+
+
+**Testing** : I tested this by deleting several household members in a row by clicking the delete button next to their name, randomly choosing which member to delete. 
+
+
+**Result** : I noticed that the correct household member wasn't always deleted and sometimes the wrong member ID was getting sent to the API. 
+
+**Fix** : The cause of this issue was that I was storing the member to delete to show in a confirmation modal. However, I didn't always reset it properly when cancelling from the modal or when clicking around. The fix here was to make sure I always reset the member to delete to `null` when the modal closed. 
