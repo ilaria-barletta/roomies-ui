@@ -461,6 +461,19 @@ The second screenshot is of me manually running ESLint in the terminal. To do th
 
 **Fix** : The cause of this issue was that I was storing the member to delete to show in a confirmation modal. However, I didn't always reset it properly when cancelling from the modal or when clicking around. The fix here was to make sure I always reset the member to delete to `null` when the modal closed. 
 
+### Unfixed bugs 
+`1`
+
+**Expected** : The user should not be able to see grocery lists for other households
+
+
+**Testing** : I tested this by manually changing the ID's in the URL when viewing the all grocery lists page. 
+
+
+**Result** : Changing the household id in the url allows the user to view the lists that exist for another household. 
+
+**Other details** : I have not fixed this bug yet as it only allows the user read access to **some** data. The user is not able to delete/modify the data as per the project requirements. 
+
 # Components 
 I have created several reusable components for this project. Below are some examples and their uses. 
 
