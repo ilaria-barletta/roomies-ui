@@ -2,7 +2,7 @@
 
 Roomies is a website addressed to people sharing an household. If you have roommates and you need to take care of sharing rent and groceries, Roomies is for you. It is possible to create households, add members, keep track of the due rent and create grocery lists as well as assign items to specific housemates. They say sharing is hard, Roomies makes it easier.
 
-![Roomies on multiple devices]()
+![Roomies on multiple devices](readme-images/responsive-example.png)
 
 The live link to the project is here: https://roomiesui-16b4bb6864ed.herokuapp.com/
 ___
